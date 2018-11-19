@@ -26,7 +26,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent * event);
 private:
     vector<IShape *>shapes;
-    map<Mode, IDrawer *>drawers;
+    map<Mode, FigureGenerator *>drawers;
 };
 
 #endif // PAINTWIDGET_H

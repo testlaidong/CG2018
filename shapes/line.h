@@ -12,7 +12,7 @@ public:
     Line(Point p0);
     Line(Point p0, Point p1);
     void setEnd(int x, int y);
-    void draw() override;
+    void draw()override;
 };
 
 #endif // LINE_H

@@ -38,7 +38,11 @@ SOURCES += \
     shapes/line.cpp \
     shapes/point.cpp \
     common.cpp \
-    drawer/linedrawer.cpp
+    drawer/linegenerator.cpp \
+    shapes/circle.cpp \
+    drawer/circlegenerator.cpp \
+    shapes/oval.cpp \
+    drawer/ovalgenerator.cpp
 
 HEADERS += \
         ui/mainwindow.h \
@@ -49,7 +53,11 @@ HEADERS += \
     shapes/line.h \
     common.h \
     drawer/drawer.h \
-    drawer/linedrawer.h
+    drawer/linegenerator.h \
+    shapes/circle.h \
+    drawer/circlegenerator.h \
+    shapes/oval.h \
+    drawer/ovalgenerator.h
 
 FORMS += \
         mainwindow.ui

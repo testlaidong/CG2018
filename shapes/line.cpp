@@ -54,7 +54,6 @@ void Line::draw()
             fraction += dy;
             auto p = Point(x0, y0);
             p.draw();
-
         }
 
     } else {

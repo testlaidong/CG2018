@@ -4,11 +4,9 @@
 #include "shapes/shape.h"
 
 #include <QMouseEvent>
+#include <vector>
 
-#include <iostream>
-using namespace std;
-
-class IDrawer
+class FigureGenerator
 {
 public:
     virtual void mousePressEvent(QMouseEvent *event){}

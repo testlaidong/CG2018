@@ -5,15 +5,12 @@
 #include "shapes/point.h"
 #include "shapes/line.h"
 
-#include <vector>
-using namespace std;
-
-class LineDrawer: public IDrawer
+class LineGenerator: public FigureGenerator
 {
     Line *line = nullptr;
-    vector<IShape*> *shapes;
+    std::vector<IShape*> *shapes;
 public:
-    LineDrawer(vector<IShape *> *shapes);
+    LineGenerator(std::vector<IShape *> *shapes);
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent * event);
