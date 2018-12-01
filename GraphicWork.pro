@@ -42,7 +42,9 @@ SOURCES += \
     shapes/circle.cpp \
     drawer/circlegenerator.cpp \
     shapes/oval.cpp \
-    drawer/ovalgenerator.cpp
+    drawer/ovalgenerator.cpp \
+    shapes/curve.cpp \
+    drawer/curvegenerator.cpp
 
 HEADERS += \
         ui/mainwindow.h \
@@ -57,7 +59,9 @@ HEADERS += \
     shapes/circle.h \
     drawer/circlegenerator.h \
     shapes/oval.h \
-    drawer/ovalgenerator.h
+    drawer/ovalgenerator.h \
+    shapes/curve.h \
+    drawer/curvegenerator.h
 
 FORMS += \
         mainwindow.ui

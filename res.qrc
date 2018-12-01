@@ -3,5 +3,7 @@
         <file>images/circle.png</file>
         <file>images/line.png</file>
         <file>images/oval.png</file>
+        <file>images/curve.png</file>
+        <file>images/polygon.png</file>
     </qresource>
 </RCC>

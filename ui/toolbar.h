@@ -17,11 +17,15 @@ public slots:
     void onLineClicked();
     void onCircleClicked();
     void onOvalClicked();
+    void onCurveClicked();
+    void onPolygonClicked();
 
 private:
     QAction                 *m_Line;
     QAction                 *m_Circle;
     QAction                 *m_Oval;
+    QAction                 *m_Curve;
+    QAction                 *m_Polygon;
 };
 
 #endif

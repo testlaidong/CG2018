@@ -6,9 +6,13 @@ enum class Mode
     MODE_NONE,
     MODE_DRAW_LINE,
     MODE_DRAW_CIRCLE,
-    MODE_DRAW_OVAL
+    MODE_DRAW_OVAL,
+    MODE_DRAW_CURVE
 };
 
+#include <map>
+#include "drawer/drawer.h"
 extern Mode mode;
+extern std::map<Mode, FigureGenerator *> *drawers_ref;
 
 #endif // COMMON_H
