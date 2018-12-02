@@ -10,9 +10,10 @@ class Oval: public IShape
     Point end;
 public:
     Oval(Point start, Point end);
-    void plot(int xc, int yc, int x, int y);
     void setEndPoint(Point p);
     void draw() override;
+private:
+    void plot(int xc, int yc, int x, int y);
 };
 
 #endif // OVAL_H

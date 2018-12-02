@@ -7,7 +7,9 @@ enum class Mode
     MODE_DRAW_LINE,
     MODE_DRAW_CIRCLE,
     MODE_DRAW_OVAL,
-    MODE_DRAW_CURVE
+    MODE_DRAW_CURVE,
+    MODE_DRAW_RECTANGLE,
+    MODE_DRAW_POLYGON
 };
 
 #include <map>

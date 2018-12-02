@@ -5,6 +5,8 @@
 #include "drawer/circlegenerator.h"
 #include "drawer/ovalgenerator.h"
 #include "drawer/curvegenerator.h"
+#include "drawer/rectanglegenerator.h"
+#include "drawer/polygongenerator.h"
 
 #include <iostream>
 using namespace std;
@@ -15,7 +17,10 @@ PaintWidget::PaintWidget(QWidget *parent): QOpenGLWidget(parent)
     drawers.insert(pair<Mode, FigureGenerator*>(Mode::MODE_DRAW_CIRCLE, new CircleGenerator(&shapes)));
     drawers.insert(pair<Mode, FigureGenerator*>(Mode::MODE_DRAW_OVAL, new OvalGenerator(&shapes)));
     drawers.insert(pair<Mode, FigureGenerator*>(Mode::MODE_DRAW_CURVE, new CurveGenerator(&shapes)));
+    drawers.insert(pair<Mode, FigureGenerator*>(Mode::MODE_DRAW_RECTANGLE, new RectangleGenerator(&shapes)));
+    drawers.insert(pair<Mode, FigureGenerator*>(Mode::MODE_DRAW_POLYGON, new PolygonGenerator(&shapes)));
     drawers_ref = &drawers;
+    setMouseTracking(true);
 }
 
 void PaintWidget::PaintWidget::initializeGL()
@@ -53,9 +58,7 @@ void PaintWidget::resizeGL(int width, int height)
 void PaintWidget::mousePressEvent(QMouseEvent *event)
  {
     if(mode != Mode::MODE_NONE)
-    {
         drawers[mode]->mousePressEvent(event);
-    }
     this->update();
 }
 

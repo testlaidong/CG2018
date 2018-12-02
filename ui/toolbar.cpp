@@ -12,16 +12,21 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     m_Oval = new QAction(QIcon(":/images/oval.png"), nullptr, this);
     m_Curve = new QAction(QIcon(":/images/curve.png"), nullptr, this);
     m_Polygon = new QAction(QIcon(":/images/polygon.png"), nullptr, this);
+    m_Rectangle = new QAction(QIcon(":/images/rectangle.png"), nullptr, this);
     this->addAction(m_Line);
     this->addAction(m_Circle);
     this->addAction(m_Oval);
     this->addAction(m_Curve);
+    this->addAction(m_Rectangle);
     this->addAction(m_Polygon);
+    this->addSeparator();
+
     connect(m_Line, SIGNAL(triggered()), this, SLOT(onLineClicked()));
     connect(m_Circle, SIGNAL(triggered()), this, SLOT(onCircleClicked()));
     connect(m_Oval, SIGNAL(triggered()), this, SLOT(onOvalClicked()));
     connect(m_Curve, SIGNAL(triggered()), this, SLOT(onCurveClicked()));
     connect(m_Polygon, SIGNAL(triggered()), this, SLOT(onPolygonClicked()));
+    connect(m_Rectangle, SIGNAL(triggered()), this, SLOT(onRectangleClicked()));
 }
 
 void ToolBar::onLineClicked()
@@ -48,7 +53,12 @@ void ToolBar::onCurveClicked()
     drawers_ref->at(mode)->reset();
 }
 
+void ToolBar::onRectangleClicked()
+{
+    mode = Mode::MODE_DRAW_RECTANGLE;
+}
+
 void ToolBar::onPolygonClicked()
 {
-
+    mode = Mode::MODE_DRAW_POLYGON;
 }

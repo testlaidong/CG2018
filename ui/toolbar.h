@@ -18,6 +18,7 @@ public slots:
     void onCircleClicked();
     void onOvalClicked();
     void onCurveClicked();
+    void onRectangleClicked();
     void onPolygonClicked();
 
 private:
@@ -25,6 +26,7 @@ private:
     QAction                 *m_Circle;
     QAction                 *m_Oval;
     QAction                 *m_Curve;
+    QAction                 *m_Rectangle;
     QAction                 *m_Polygon;
 };
 

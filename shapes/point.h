@@ -12,6 +12,7 @@ public:
     void draw();
     int getX(){return x;}
     int getY() {return y;}
+    bool operator ==(const Point& d);
 };
 
 #endif // POINT_H

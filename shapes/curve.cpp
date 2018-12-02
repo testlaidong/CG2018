@@ -36,9 +36,9 @@ void Curve::generate()
         int y = 0;
         for(unsigned k = 0; k < n; k++)
         {
-            auto blend = c[k] * powf(u, k) * powf(1 - u, n - 1 - k);
-            x += control_points[k].getX() * blend;
-            y += control_points[k].getY() * blend;
+            auto coefficient = c[k] * powf(u, k) * powf(1 - u, n - 1 - k);
+            x += control_points[k].getX() * coefficient;
+            y += control_points[k].getY() * coefficient;
         }
         Point(x, y).draw();
     }

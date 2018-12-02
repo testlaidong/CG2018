@@ -6,7 +6,6 @@ using namespace std;
 
 class IShape
 {
-    static std::tuple<float, float, float> color;
 public:
     virtual void draw(){}
 };
