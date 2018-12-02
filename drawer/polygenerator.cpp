@@ -1,4 +1,4 @@
-#include "polygongenerator.h"
+#include "polygenerator.h"
 
 PolygonGenerator::PolygonGenerator(std::vector<IShape *>* v): shapes(v)
 {

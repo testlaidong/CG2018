@@ -14,16 +14,18 @@ Line::Line(Point p0, Point p1)
 {
     this->p0 = p0;
     this->p1 = p1;
+    calcPoints();
 }
 
 void Line::setEnd(int x, int y)
 {
     this->p1.reset(x, y);
+    calcPoints();
 }
 
-void Line::draw()
+void Line::calcPoints()
 {
-
+    points.clear();
     int x0 = p0.getX();
     int y0 = p0.getY();
     int x1 = p1.getX();
@@ -40,8 +42,7 @@ void Line::draw()
     dy <<= 1; /* dy is now 2*dy */
     dx <<= 1; /* dx is now 2*dx */
 
-    auto p = Point(x0, y0);
-    p.draw();
+    points.push_back(Point(x0, y0));
 
     if (dx > dy) {
         int fraction = dy - (dx >> 1);
@@ -52,8 +53,7 @@ void Line::draw()
                 fraction -= dx;
             }
             fraction += dy;
-            auto p = Point(x0, y0);
-            p.draw();
+            points.push_back(Point(x0, y0));
         }
 
     } else {
@@ -65,8 +65,22 @@ void Line::draw()
             }
             y0 += stepy;
             fraction += dx;
-            auto p = Point(x0, y0);
-            p.draw();
+            points.push_back(Point(x0, y0));
+
         }
     }
+}
+
+void Line::bound(BoundingBox &box)
+{
+    box.setLeft(min(p0.getX(), p1.getX()));
+    box.setRight(max(p0.getX(), p1.getX()));
+    box.setTop(min(p0.getY(), p1.getY()));
+    box.setBottom(max(p0.getY(), p1.getY()));
+}
+
+void Line::draw()
+{
+    for(auto p: points)
+        p.draw();
 }

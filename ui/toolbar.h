@@ -20,6 +20,7 @@ public slots:
     void onCurveClicked();
     void onRectangleClicked();
     void onPolygonClicked();
+    void onSelectClicked();
 
 private:
     QAction                 *m_Line;
@@ -28,6 +29,7 @@ private:
     QAction                 *m_Curve;
     QAction                 *m_Rectangle;
     QAction                 *m_Polygon;
+    QAction                 *m_Select;
 };
 
 #endif

@@ -1,4 +1,4 @@
-#include "rectanglegenerator.h"
+#include "rectgenerator.h"
 
 RectangleGenerator::RectangleGenerator(std::vector<IShape *>* v): shapes(v)
 {

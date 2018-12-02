@@ -9,10 +9,14 @@ class Curve: public IShape
     vector<Point>control_points;
 public:
     Curve(Point p0);
-    void generate();
     void addControlPoint(Point p);
     void draw()override;
     size_t nrControlPoints();
+    Point lastControlPoints();
+    void bound(BoundingBox& box)override;
+
+private:
+    void calcPoints()override;
 };
 
 #endif // CURVE_H

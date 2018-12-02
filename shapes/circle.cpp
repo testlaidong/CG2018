@@ -1,14 +1,17 @@
 #include "circle.h"
+#include <cmath>
 
 Circle::Circle(Point center, int radius)
 {
     this->center = center;
     this->radius = radius;
+    calcPoints();
 }
 
 void Circle::setRadius(int radius)
 {
     this->radius = radius;
+    calcPoints();
 }
 
 void Circle::plot(int dx, int dy)
@@ -17,19 +20,20 @@ void Circle::plot(int dx, int dy)
     int d2[] = {1, 1, -1, -1, 1, 1, -1, -1};
     int i = 0;
     for(i = 0; i < 4; i++)
-    {
-        auto p = Point(center.getX() + d1[i] * dx, center.getY() + d2[i] * dy);
-        p.draw();
-    }
+        points.push_back(Point(center.getX() + d1[i] * dx, center.getY() + d2[i] * dy));
     for(; i < 8; i++)
-    {
-        auto p = Point(center.getX() + d1[i] * dy, center.getY() + d2[i] * dx);
-        p.draw();
-    }
+        points.push_back(Point(center.getX() + d1[i] * dy, center.getY() + d2[i] * dx));
 }
 
 void Circle::draw()
 {
+    for(auto p: points)
+        p.draw();
+}
+
+void Circle::calcPoints()
+{
+    points.clear();
     auto x = 0;
     auto y = radius;
     auto p = 1 - radius;
@@ -46,6 +50,19 @@ void Circle::draw()
         }
         plot(x, y);
     }
+}
+
+bool Circle::selected(Point p)
+{
+    return abs(p - center - radius) <= 5;
+}
+
+void Circle::bound(BoundingBox & box)
+{
+    box.setLeft(center.getX() - radius);
+    box.setRight(center.getX() + radius);
+    box.setTop(center.getY() - radius);
+    box.setBottom(center.getY() + radius);
 }
 
 Point Circle::getCenter()

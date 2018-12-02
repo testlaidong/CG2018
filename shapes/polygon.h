@@ -14,6 +14,10 @@ public:
     void setLastVertex(Point p);
     bool close();
     void draw()override;
+    void bound(BoundingBox& box)override;
+
+private:
+    void calcPoints()override;
 };
 
 #endif // POLYGON_H

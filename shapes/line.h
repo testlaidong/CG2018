@@ -13,6 +13,9 @@ public:
     Line(Point p0, Point p1);
     void setEnd(int x, int y);
     void draw()override;
+private:
+    void calcPoints() override;
+    void bound(BoundingBox &box) override;
 };
 
 #endif // LINE_H

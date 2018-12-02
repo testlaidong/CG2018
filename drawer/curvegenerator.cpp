@@ -11,11 +11,15 @@ void CurveGenerator::mousePressEvent(QMouseEvent *event)
     if(curve == nullptr)
     {
         curve = new Curve(Point(event->x(), event->y()));
+        shapes->push_back(curve);
     }
     else
     {
-        curve->addControlPoint(Point(event->x(), event->y()));
-        shapes->push_back(curve);
+        auto p = Point(event->x(), event->y());
+        if(p == curve->lastControlPoints())
+            curve = nullptr;
+        else
+            curve->addControlPoint(Point(event->x(), event->y()));
     }
 }
 

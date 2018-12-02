@@ -46,9 +46,10 @@ SOURCES += \
     shapes/curve.cpp \
     drawer/curvegenerator.cpp \
     shapes/rectangle.cpp \
-    drawer/rectanglegenerator.cpp \
     shapes/polygon.cpp \
-    drawer/polygongenerator.cpp
+    drawer/polygenerator.cpp \
+    drawer/rectgenerator.cpp \
+    box.cpp
 
 HEADERS += \
         ui/mainwindow.h \
@@ -67,9 +68,10 @@ HEADERS += \
     shapes/curve.h \
     drawer/curvegenerator.h \
     shapes/rectangle.h \
-    drawer/rectanglegenerator.h \
     shapes/polygon.h \
-    drawer/polygongenerator.h
+    drawer/polygenerator.h \
+    drawer/rectgenerator.h \
+    box.h
 
 FORMS += \
         mainwindow.ui

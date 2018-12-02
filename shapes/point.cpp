@@ -25,3 +25,11 @@ bool Point::operator==(const Point& d)
     int dd = dx * dx + dy * dy;
     return dd <= 25;
 }
+
+int Point::operator-(const Point& d)
+{
+    int dx = d.x - x;
+    int dy = d.y - y;
+    int dd = dx * dx + dy * dy;
+    return static_cast<int>(sqrt(dd));
+}

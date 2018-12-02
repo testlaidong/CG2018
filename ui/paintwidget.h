@@ -9,6 +9,7 @@
 #include "QOpenGLFunctions"
 #include "common.h"
 #include "drawer/drawer.h"
+#include "box.h"
 
 using namespace std;
 
@@ -17,6 +18,8 @@ class PaintWidget: public QOpenGLWidget, protected QOpenGLFunctions
     Q_OBJECT
 public:
     PaintWidget(QWidget *parent = nullptr);
+    void resetSelector();
+
 protected:
     void initializeGL();
     void paintGL();
@@ -24,8 +27,11 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent * event);
+
 private:
     vector<IShape *>shapes;
+    IShape *selected;
+    BoundingBox box;
     map<Mode, FigureGenerator *>drawers;
 };
 

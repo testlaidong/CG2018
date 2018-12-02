@@ -12,8 +12,12 @@ public:
     Circle(Point center, int radius);
     void setRadius(int radius);
     Point getCenter();
-    void plot(int dx, int dy);
     void draw() override;
+    void bound(BoundingBox& box)override;
+private:
+    void calcPoints() override;
+    bool selected(Point p);
+    void plot(int dx, int dy);
 };
 
 #endif // CIRCLE_H

@@ -6,5 +6,6 @@
         <file>images/curve.png</file>
         <file>images/polygon.png</file>
         <file>images/rectangle.png</file>
+        <file>images/select.png</file>
     </qresource>
 </RCC>

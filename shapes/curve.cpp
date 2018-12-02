@@ -11,6 +11,7 @@ Curve::Curve(Point p0)
 void Curve::addControlPoint(Point pi)
 {
     control_points.push_back(pi);
+    calcPoints();
 }
 
 size_t Curve::nrControlPoints()
@@ -18,9 +19,9 @@ size_t Curve::nrControlPoints()
     return control_points.size();
 }
 
-
-void Curve::generate()
+void Curve::calcPoints()
 {
+    points.clear();
     auto n = control_points.size();
     vector<int>c(n, 1);
     for(unsigned k = 0; k <= n - 1; k++)
@@ -30,7 +31,7 @@ void Curve::generate()
         for(auto i = n - 1- k; i >= 2; i--)
             c[k] /= i;
     }
-    for(float u = 0.0; u <= 1; u += 0.001)
+    for(float u = 0.0; u <= 1; u += 0.004)
     {
         int x = 0;
         int y = 0;
@@ -40,15 +41,41 @@ void Curve::generate()
             x += control_points[k].getX() * coefficient;
             y += control_points[k].getY() * coefficient;
         }
-        Point(x, y).draw();
+        points.push_back(Point(x, y));
     }
+}
+
+Point Curve::lastControlPoints()
+{
+    return control_points[control_points.size() - 1];
 }
 
 void Curve::draw()
 {
-    generate();
+    for(auto p: points)
+        p.draw();
+    /*
     for(unsigned i = 0; i < control_points.size() - 1; i++)
     {
         Line(control_points[i], control_points[i+1]).draw();
+    }*/
+}
+
+void Curve::bound(BoundingBox & box)
+{
+    auto minx = 10000;
+    auto miny = 10000;
+    auto maxx = 0;
+    auto maxy = 0;
+    for(auto p: points)
+    {
+        minx = min(minx, p.getX());
+        maxx = max(maxx, p.getX());
+        miny = min(miny, p.getY());
+        maxy = max(maxy, p.getY());
     }
+    box.setLeft(minx);
+    box.setRight(maxx);
+    box.setTop(miny);
+    box.setBottom(maxy);
 }
