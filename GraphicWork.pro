@@ -37,7 +37,7 @@ SOURCES += \
     ui/toolbar.cpp \
     shapes/line.cpp \
     shapes/point.cpp \
-    common.cpp \
+    common/common.cpp \
     drawer/linegenerator.cpp \
     shapes/circle.cpp \
     drawer/circlegenerator.cpp \
@@ -49,7 +49,8 @@ SOURCES += \
     shapes/polygon.cpp \
     drawer/polygenerator.cpp \
     drawer/rectgenerator.cpp \
-    box.cpp
+    common/box.cpp
+
 
 HEADERS += \
         ui/mainwindow.h \
@@ -58,7 +59,7 @@ HEADERS += \
     shapes/shape.h \
     shapes/point.h \
     shapes/line.h \
-    common.h \
+    common/common.h \
     drawer/drawer.h \
     drawer/linegenerator.h \
     shapes/circle.h \
@@ -71,7 +72,7 @@ HEADERS += \
     shapes/polygon.h \
     drawer/polygenerator.h \
     drawer/rectgenerator.h \
-    box.h
+    common/box.h
 
 FORMS += \
         mainwindow.ui

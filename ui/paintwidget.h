@@ -7,9 +7,9 @@
 #include <map>
 #include <vector>
 #include "QOpenGLFunctions"
-#include "common.h"
+#include "common/common.h"
 #include "drawer/drawer.h"
-#include "box.h"
+#include "common/box.h"
 
 using namespace std;
 

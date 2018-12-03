@@ -1,5 +1,5 @@
 #include "paintwidget.h"
-#include "box.h"
+#include "common/box.h"
 #include "shapes/point.h"
 #include "drawer/drawer.h"
 #include "drawer/linegenerator.h"

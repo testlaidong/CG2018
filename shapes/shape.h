@@ -2,7 +2,7 @@
 #define SHAPE_H
 
 #include "point.h"
-#include "box.h"
+#include "common/box.h"
 
 #include <vector>
 using namespace std;

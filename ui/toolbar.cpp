@@ -1,6 +1,6 @@
 #include "toolbar.h"
 #include "paintwidget.h"
-#include "common.h"
+#include "common/common.h"
 
 #include <iostream>
 using namespace std;
@@ -39,6 +39,7 @@ void ToolBar::onLineClicked()
     mode = Mode::MODE_DRAW_LINE;
     m_Line->setChecked(TRUE);
     pWidget->resetSelector();
+    m_Line->setEnabled(true);
 }
 
 void ToolBar::onCircleClicked()
