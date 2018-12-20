@@ -12,6 +12,8 @@
 #include "editor/circleeditor.h"
 #include "editor/ovaleditor.h"
 #include "editor/curveeditor.h"
+#include "editor/recteditor.h"
+#include "editor/polyeditor.h"
 
 #include <iostream>
 using namespace std;
@@ -28,6 +30,8 @@ PaintWidget::PaintWidget(QWidget *parent): QOpenGLWidget(parent)
     editors[Mode::MODE_DRAW_CIRCLE] = new CircleEditor();
     editors[Mode::MODE_DRAW_OVAL] = new OvalEditor();
     editors[Mode::MODE_DRAW_CURVE] = new CurveEditor();
+    editors[Mode::MODE_DRAW_RECTANGLE] = new RectEditor();
+    editors[Mode::MODE_DRAW_POLYGON] = new PolyEditor();
     drawers_ref = &drawers;
     pWidget = this;
     selected = nullptr;

@@ -49,7 +49,8 @@ void Poly::draw()
 
 void Poly::drawControlPoints()
 {
-
+    for(auto p: vertexs)
+        p.drawCircle();
 }
 
 void Poly::bound(BoundingBox & box)
@@ -69,4 +70,23 @@ void Poly::bound(BoundingBox & box)
     box.setRight(maxx);
     box.setTop(miny);
     box.setBottom(maxy);
+}
+
+Point* Poly::boolVertex(Point p)
+{
+    for(size_t i = 0; i < vertexs.size(); i++)
+        if(vertexs[i] == p)
+            return &vertexs[i];
+    return nullptr;
+}
+
+void Poly::update()
+{
+    calcPoints();
+}
+
+void Poly::translate(int dx, int dy)
+{
+    for(size_t i = 0; i < vertexs.size(); i++)
+        vertexs[i].translate(dx, dy);
 }

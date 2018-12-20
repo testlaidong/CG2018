@@ -16,7 +16,9 @@ public:
     void draw()override;
     void drawControlPoints()override;
     void bound(BoundingBox& box)override;
-
+    Point* boolVertex(Point p);
+    void update()override;
+    void translate(int dx, int dy)override;
 private:
     void calcPoints()override;
 };

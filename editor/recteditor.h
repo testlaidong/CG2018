@@ -1,13 +1,13 @@
-#ifndef OVALEDITOR_H
-#define OVALEDITOR_H
+#ifndef RECTEDITOR_H
+#define RECTEDITOR_H
 
 #include "editor.h"
-#include "shapes/oval.h"
+#include "shapes/rectangle.h"
 
-class OvalEditor: public Editor
+class RectEditor: public Editor
 {
     BoundingBox *box;
-    Oval *oval;
+    Rect *rect;
     enum class EditMode
     {
         NONE,
@@ -25,11 +25,11 @@ class OvalEditor: public Editor
     Point *pold;
 
 public:
-    OvalEditor();
+    RectEditor();
     void setEdit(IShape *shape, BoundingBox *box) override;
     void mousePressEvent(QMouseEvent *)override;
     void mouseMoveEvent(QMouseEvent *)override;
     void mouseReleaseEvent(QMouseEvent * )override;
 };
 
-#endif // OVALEDITOR_H
+#endif // RECTEDITOR_H
