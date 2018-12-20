@@ -22,6 +22,7 @@ public slots:
     void onPolygonClicked();
     void onSelectClicked();
 
+
 private:
     QAction                 *m_Line;
     QAction                 *m_Circle;
@@ -30,6 +31,10 @@ private:
     QAction                 *m_Rectangle;
     QAction                 *m_Polygon;
     QAction                 *m_Select;
+    QAction                 *m_enlarge;
+    QAction                 *m_narrow;
+    QAction                 *m_rotateRight;
+    QAction                 *m_rotateLeft;
     QAction                 *m_Fill;
 };
 

@@ -17,6 +17,11 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     m_Rectangle = new QAction(QIcon(":/images/rectangle.png"), nullptr, this);
     m_Select = new QAction(QIcon(":/images/select.png"), nullptr, this);
     m_Fill = new QAction(QIcon(":/images/fill.jpg"), nullptr, this);
+    m_enlarge = new QAction(QIcon(":/images/add.png"), nullptr, this);
+    m_narrow = new QAction(QIcon(":/images/minus.png"), nullptr, this);
+    m_rotateRight = new QAction(QIcon(":/images/rotate_right.png"), nullptr, this);
+    m_rotateLeft = new QAction(QIcon(":/images/rotate_left.png"), nullptr, this);
+
 
     this->addAction(m_Line);
     this->addAction(m_Circle);
@@ -26,6 +31,10 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addAction(m_Polygon);
     this->addSeparator();
     this->addAction(m_Select);
+    this->addAction(m_enlarge);
+    this->addAction(m_narrow);
+    this->addAction(m_rotateRight);
+    this->addAction(m_rotateLeft);
     this->addAction(m_Fill);
     this->addSeparator();
 

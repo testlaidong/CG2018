@@ -8,5 +8,9 @@
         <file>images/rectangle.png</file>
         <file>images/select.png</file>
         <file>images/fill.jpg</file>
+        <file>images/add.png</file>
+        <file>images/minus.png</file>
+        <file>images/rotate_right.png</file>
+        <file>images/rotate_left.png</file>
     </qresource>
 </RCC>
