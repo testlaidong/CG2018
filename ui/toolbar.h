@@ -30,6 +30,7 @@ private:
     QAction                 *m_Rectangle;
     QAction                 *m_Polygon;
     QAction                 *m_Select;
+    QAction                 *m_Fill;
 };
 
 #endif

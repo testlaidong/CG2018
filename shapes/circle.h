@@ -13,7 +13,11 @@ public:
     void setRadius(int radius);
     Point getCenter();
     void draw() override;
+    void drawControlPoints()override;
     void bound(BoundingBox& box)override;
+    Point* onCircle(Point p);
+    void translate(int dx, int dy) override;
+    void update()override;
 private:
     void calcPoints() override;
     bool selected(Point p);

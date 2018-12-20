@@ -8,13 +8,16 @@ Line::Line(Point p0)
 {
     this->p0 = p0;
     this->p1 = p0;
+    _type = Mode::MODE_DRAW_LINE;
 }
 
-Line::Line(Point p0, Point p1)
+Line::Line(Point p0, Point p1, bool dash)
 {
     this->p0 = p0;
     this->p1 = p1;
+    this->dash = dash;
     calcPoints();
+    _type = Mode::MODE_DRAW_LINE;
 }
 
 void Line::setEnd(int x, int y)
@@ -69,6 +72,11 @@ void Line::calcPoints()
 
         }
     }
+    if(dash)
+    {
+        for(int i = 0; i < points.size(); i++)
+            points[i].setRGB(0, 0, 1);
+    }
 }
 
 void Line::bound(BoundingBox &box)
@@ -81,6 +89,50 @@ void Line::bound(BoundingBox &box)
 
 void Line::draw()
 {
-    for(auto p: points)
-        p.draw();
+    if(!dash)
+        for(auto p: points)
+            p.draw();
+    else
+    {
+        int cur = 0;
+        bool mask[] = {false, false, true, true};
+        for(auto p: points)
+        {
+            if(!mask[cur++])
+                p.draw();
+            if(cur >= 4)
+                cur = 0;
+        }
+    }
+}
+
+void Line::drawControlPoints()
+{
+    p0.drawCircle();
+    p1.drawCircle();
+}
+
+bool Line::spectialPoint(Point p)
+{
+    return p == p0 or p == p1;
+}
+
+Point *Line::boolEndPoint(Point p)
+{
+    if(p == p0)
+        return &p0;
+    else if(p == p1)
+        return &p1;
+    return nullptr;
+}
+
+void Line::update()
+{
+    calcPoints();
+}
+
+void Line::translate(int dx, int dy)
+{
+    p0.translate(dx, dy);
+    p1.translate(dx, dy);
 }

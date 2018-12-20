@@ -5,6 +5,7 @@ Poly::Poly(Point start, Point next)
     vertexs.push_back(start);
     vertexs.push_back(next);
     calcPoints();
+    _type = Mode::MODE_DRAW_POLYGON;
 }
 
 void Poly::addVertex(Point p)
@@ -44,6 +45,11 @@ void Poly::draw()
 {
     for(auto p: points)
         p.draw();
+}
+
+void Poly::drawControlPoints()
+{
+
 }
 
 void Poly::bound(BoundingBox & box)

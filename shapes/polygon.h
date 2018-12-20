@@ -14,6 +14,7 @@ public:
     void setLastVertex(Point p);
     bool close();
     void draw()override;
+    void drawControlPoints()override;
     void bound(BoundingBox& box)override;
 
 private:

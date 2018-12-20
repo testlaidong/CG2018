@@ -7,5 +7,6 @@
         <file>images/polygon.png</file>
         <file>images/rectangle.png</file>
         <file>images/select.png</file>
+        <file>images/fill.jpg</file>
     </qresource>
 </RCC>

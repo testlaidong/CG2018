@@ -1,4 +1,5 @@
 #include "oval.h"
+#include "line.h"
 #include <math.h>
 
 #define ROUND(a) (static_cast<int>(a + 0.5))
@@ -8,6 +9,7 @@ Oval::Oval(Point start, Point end)
     this->start = start;
     this->end = end;
     calcPoints();
+    _type = Mode::MODE_DRAW_OVAL;
 }
 
 void Oval::setEndPoint(Point p)
@@ -82,10 +84,139 @@ void Oval::draw()
         p.draw();
 }
 
+void Oval::drawControlPoints()
+{
+    auto center = Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
+    int rx = abs(end.getX() - start.getX()) >> 1;
+    int ry = abs(end.getY() - start.getY()) >> 1;
+    center.drawCircle();
+    auto pl = Point(center.getX() - rx, center.getY());
+    auto pr = Point(center.getX() + rx, center.getY());
+    Line(pl, pr, true).draw();
+    auto pt = Point(center.getX(), center.getY() - ry);
+    auto pb = Point(center.getX(), center.getY() + ry);
+    Line(pt, pb, true).draw();
+    start.drawCircle();
+    end.drawCircle();
+    Point(start.getX() + rx, start.getY()).drawCircle();
+    Point(end.getX(), start.getY()).drawCircle();
+    Point(start.getX(), start.getY() + ry).drawCircle();
+    Point(end.getX(), start.getY() + ry).drawCircle();
+    Point(start.getX(), end.getY()).drawCircle();
+    Point(start.getX() + rx, end.getY()).drawCircle();
+}
+
 void Oval::bound(BoundingBox & box)
 {
     box.setLeft(min(start.getX(), end.getX()));
     box.setRight(max(start.getX(), end.getX()));
     box.setTop(min(start.getY(), end.getY()));
     box.setBottom(max(start.getY(), end.getY()));
+}
+
+void Oval::update()
+{
+    calcPoints();
+}
+
+Point& Oval::topleft()
+{
+    if(start <= end)
+        return start;
+    return end;
+}
+
+Point& Oval::bottomRight()
+{
+    if(start <= end)
+        return end;
+    return start;
+}
+
+bool Oval::isTopLeft(Point p)
+{
+    return p == topleft();
+}
+
+void Oval::moveTopLeft(Point p)
+{
+    topleft() = p;
+}
+
+bool Oval::isTopRight(Point p)
+{
+   return Point(bottomRight().getX(), topleft().getY()) == p;
+}
+
+void Oval::moveTopRight(Point p)
+{
+    topleft().translate(0, p.getY() - topleft().getY());
+    bottomRight().translate(p.getX() - bottomRight().getX(), 0);
+}
+
+bool Oval::isBottomLeft(Point p)
+{
+    return Point(topleft().getX(), bottomRight().getY()) == p;
+}
+
+void Oval::moveBottomLeft(Point p)
+{
+    topleft().translate(p.getX() - topleft().getX(), 0);
+    bottomRight().translate(0, p.getY() - bottomRight().getY());
+}
+
+bool Oval::isBottomRight(Point p)
+{
+    return p == bottomRight();
+}
+
+void Oval::moveBottomRight(Point p)
+{
+    bottomRight() = p;
+}
+
+bool Oval::isTopCenter(Point p)
+{
+    return p == Point((topleft().getX() + bottomRight().getX()) / 2, topleft().getY());
+}
+
+void Oval::moveTopCenter(Point p)
+{
+    topleft().translate(0, p.getY() - topleft().getY());
+}
+
+bool Oval::isLeftCenter(Point p)
+{
+    return p == Point(topleft().getX(), (topleft().getY() + bottomRight().getY()) / 2);
+}
+
+void Oval::moveLeftCenter(Point p)
+{
+    topleft().translate(p.getX() - topleft().getX(), 0);
+}
+
+bool Oval::isRightCenter(Point p)
+{
+    return p == Point(bottomRight().getX(), (topleft().getY() + bottomRight().getY()) / 2);
+}
+
+void Oval::moveRightCenter(Point p)
+{
+    bottomRight().translate(p.getX() - bottomRight().getX(), 0);
+}
+
+bool Oval::isBottomCenter(Point p)
+{
+    return p == Point((topleft().getX() + bottomRight().getX()) / 2, bottomRight().getY());
+}
+
+void Oval::moveBottomCenter(Point p)
+{
+    bottomRight().translate(0, p.getY() - bottomRight().getY());
+}
+
+void Oval::translate(int dx, int dy)
+{
+    start.translate(dx, dy);
+    end.translate(dx, dy);
 }

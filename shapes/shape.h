@@ -3,18 +3,27 @@
 
 #include "point.h"
 #include "common/box.h"
+#include "common/mode.h"
 
 #include <vector>
+#include <iostream>
 using namespace std;
+
 
 class IShape
 {
 protected:
+    Mode _type;
     vector<Point>points;
     virtual void calcPoints(){}
 public:
-    virtual void bound(BoundingBox &box){};
+    virtual void bound(BoundingBox&){}
     virtual void draw(){}
+    virtual void drawControlPoints(){}
+    virtual bool spectialPoint(Point p){}
+    virtual void update(){}
+    virtual void translate(int dx, int dy){}
+    Mode type(){return _type;}
     bool selected(Point p)
     {
         for(auto p0: points)

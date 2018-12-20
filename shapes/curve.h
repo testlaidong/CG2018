@@ -11,10 +11,13 @@ public:
     Curve(Point p0);
     void addControlPoint(Point p);
     void draw()override;
+    void drawControlPoints()override;
     size_t nrControlPoints();
     Point lastControlPoints();
     void bound(BoundingBox& box)override;
-
+    Point* boolControlPoint(Point p);
+    void translate(int dx, int dy)override;
+    void update()override;
 private:
     void calcPoints()override;
 };

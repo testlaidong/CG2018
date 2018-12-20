@@ -6,6 +6,7 @@
 Curve::Curve(Point p0)
 {
     control_points.push_back(p0);
+    _type = Mode::MODE_DRAW_CURVE;
 }
 
 void Curve::addControlPoint(Point pi)
@@ -17,6 +18,14 @@ void Curve::addControlPoint(Point pi)
 size_t Curve::nrControlPoints()
 {
     return control_points.size();
+}
+
+void Curve::drawControlPoints()
+{
+    for(unsigned i = 0; i < control_points.size() - 1; i++)
+        Line(control_points[i], control_points[i+1], true).draw();
+    for(auto p: control_points)
+        p.drawCircle();
 }
 
 void Curve::calcPoints()
@@ -54,11 +63,6 @@ void Curve::draw()
 {
     for(auto p: points)
         p.draw();
-    /*
-    for(unsigned i = 0; i < control_points.size() - 1; i++)
-    {
-        Line(control_points[i], control_points[i+1]).draw();
-    }*/
 }
 
 void Curve::bound(BoundingBox & box)
@@ -67,7 +71,7 @@ void Curve::bound(BoundingBox & box)
     auto miny = 10000;
     auto maxx = 0;
     auto maxy = 0;
-    for(auto p: points)
+    for(auto p: control_points)
     {
         minx = min(minx, p.getX());
         maxx = max(maxx, p.getX());
@@ -78,4 +82,23 @@ void Curve::bound(BoundingBox & box)
     box.setRight(maxx);
     box.setTop(miny);
     box.setBottom(maxy);
+}
+
+Point* Curve::boolControlPoint(Point p)
+{
+    for(size_t i = 0;i < control_points.size(); i++)
+        if(p == control_points[i])
+            return &control_points[i];
+    return nullptr;
+}
+
+void Curve::translate(int dx, int dy)
+{
+    for(size_t i = 0; i < control_points.size(); i++)
+        control_points[i].translate(dx, dy);
+}
+
+void Curve::update()
+{
+    calcPoints();
 }

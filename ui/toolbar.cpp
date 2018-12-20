@@ -8,6 +8,7 @@ using namespace std;
 ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
 {
     setFocusPolicy(Qt::StrongFocus);
+    BACKGROUND_BLUE;
     m_Line = new QAction(QIcon(":/images/line.png"), nullptr,this);
     m_Circle = new QAction(QIcon(":/images/circle.png"), nullptr, this);
     m_Oval = new QAction(QIcon(":/images/oval.png"), nullptr, this);
@@ -15,6 +16,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     m_Polygon = new QAction(QIcon(":/images/polygon.png"), nullptr, this);
     m_Rectangle = new QAction(QIcon(":/images/rectangle.png"), nullptr, this);
     m_Select = new QAction(QIcon(":/images/select.png"), nullptr, this);
+    m_Fill = new QAction(QIcon(":/images/fill.jpg"), nullptr, this);
 
     this->addAction(m_Line);
     this->addAction(m_Circle);
@@ -24,6 +26,9 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addAction(m_Polygon);
     this->addSeparator();
     this->addAction(m_Select);
+    this->addAction(m_Fill);
+    this->addSeparator();
+
 
     connect(m_Line, SIGNAL(triggered()), this, SLOT(onLineClicked()));
     connect(m_Circle, SIGNAL(triggered()), this, SLOT(onCircleClicked()));

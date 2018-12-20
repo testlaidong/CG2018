@@ -12,7 +12,7 @@ LIBS += -lopengl32\
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = GraphicWork
+TARGET = CG2018
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -37,19 +37,23 @@ SOURCES += \
     ui/toolbar.cpp \
     shapes/line.cpp \
     shapes/point.cpp \
-    common/common.cpp \
-    drawer/linegenerator.cpp \
     shapes/circle.cpp \
-    drawer/circlegenerator.cpp \
     shapes/oval.cpp \
-    drawer/ovalgenerator.cpp \
     shapes/curve.cpp \
-    drawer/curvegenerator.cpp \
     shapes/rectangle.cpp \
     shapes/polygon.cpp \
+    common/box.cpp \
+    common/common.cpp \
+    drawer/linegenerator.cpp \
+    drawer/circlegenerator.cpp \
+    drawer/ovalgenerator.cpp \
+    drawer/curvegenerator.cpp \
     drawer/polygenerator.cpp \
     drawer/rectgenerator.cpp \
-    common/box.cpp
+    editor/lineeditor.cpp \
+    editor/circleeditor.cpp \
+    editor/ovaleditor.cpp \
+    editor/curveeditor.cpp
 
 
 HEADERS += \
@@ -59,20 +63,26 @@ HEADERS += \
     shapes/shape.h \
     shapes/point.h \
     shapes/line.h \
-    common/common.h \
-    drawer/drawer.h \
-    drawer/linegenerator.h \
     shapes/circle.h \
-    drawer/circlegenerator.h \
     shapes/oval.h \
-    drawer/ovalgenerator.h \
     shapes/curve.h \
-    drawer/curvegenerator.h \
     shapes/rectangle.h \
     shapes/polygon.h \
+    common/common.h \
+    common/box.h \
+    drawer/drawer.h \
+    drawer/linegenerator.h \
+    drawer/circlegenerator.h \
+    drawer/ovalgenerator.h \
+    drawer/curvegenerator.h \
     drawer/polygenerator.h \
     drawer/rectgenerator.h \
-    common/box.h
+    editor/editor.h \
+    editor/lineeditor.h \
+    common/mode.h \
+    editor/circleeditor.h \
+    editor/ovaleditor.h \
+    editor/curveeditor.h
 
 FORMS += \
         mainwindow.ui

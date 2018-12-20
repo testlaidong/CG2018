@@ -10,6 +10,7 @@
 #include "common/common.h"
 #include "drawer/drawer.h"
 #include "common/box.h"
+#include "editor/editor.h"
 
 using namespace std;
 
@@ -33,6 +34,7 @@ private:
     IShape *selected;
     BoundingBox box;
     map<Mode, FigureGenerator *>drawers;
+    map<Mode, Editor *>editors;
 };
 
 #endif // PAINTWIDGET_H

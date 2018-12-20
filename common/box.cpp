@@ -35,20 +35,34 @@ void BoundingBox::setTop(int t)
     this->top = t;
 }
 
+int BoundingBox::getLeft()
+{
+    return left;
+}
+
+int BoundingBox::getRight()
+{
+    return right;
+}
+
+int BoundingBox::getTop()
+{
+    return top;
+}
+
+int BoundingBox::getBottom()
+{
+    return bottom;
+}
+
 void BoundingBox::draw()
 {
-    bool mask[] = {false, false, true, true};
     Point ps[] = {Point(left, top), Point(right, top), Point(right, bottom), Point(left, bottom), Point(left, top)};
     for(int i = 0; i < 4; i++)
-    {
-        auto v = Line(ps[i], ps[i+1]).getPoints();
-        int cur = 0;
-        for(auto p: v)
-        {
-            if(!mask[cur++])
-                p.draw();
-            if(cur >= 4)
-                cur = 0;
-        }
-    }
+        Line(ps[i], ps[i+1], true).draw();
+}
+
+bool BoundingBox::in(int x, int y)
+{
+    return x >= left and x <= right and y >= top and y <= bottom;
 }

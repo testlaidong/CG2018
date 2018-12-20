@@ -6,6 +6,7 @@ Rect::Rect(Point p0, Point p1)
     pstart = p0;
     pend = p1;
     calcPoints();
+    _type = Mode::MODE_DRAW_RECTANGLE;
 }
 
 void Rect::setEndPoint(Point p)
@@ -35,6 +36,11 @@ void Rect::draw()
 {
     for(auto p: points)
         p.draw();
+}
+
+void Rect::drawControlPoints()
+{
+
 }
 
 void Rect::bound(BoundingBox & box)
