@@ -26,14 +26,6 @@ void OvalEditor::mousePressEvent(QMouseEvent *e)
         editMode = EditMode::BOTTOM_LEFT;
     else if(oval->isBottomRight(p))
         editMode = EditMode::BOTTOM_RIGHT;
-    else if(oval->isTopCenter(p))
-        editMode = EditMode::TOP;
-    else if(oval->isLeftCenter(p))
-        editMode = EditMode::LEFT;
-    else if(oval->isRightCenter(p))
-        editMode = EditMode::RIGHT;
-    else if(oval->isBottomCenter(p))
-        editMode = EditMode::BOTTOM;
     else
     {
         editMode = EditMode::MOVE;
@@ -52,14 +44,6 @@ void OvalEditor::mouseMoveEvent(QMouseEvent *e)
         oval->moveBottomLeft(p);
     else if(editMode == EditMode::BOTTOM_RIGHT)
         oval->moveBottomRight(p);
-    else if(editMode == EditMode::TOP)
-        oval->moveTopCenter(p);
-    else if(editMode == EditMode::LEFT)
-        oval->moveLeftCenter(p);
-    else if(editMode == EditMode::RIGHT)
-        oval->moveRightCenter(p);
-    else if(editMode == EditMode::BOTTOM)
-        oval->moveBottomCenter(p);
     else if(editMode == EditMode::MOVE)
     {
         auto dx = e->x() - pold->getX();

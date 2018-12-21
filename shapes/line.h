@@ -20,6 +20,10 @@ public:
     void update()override;
     void bound(BoundingBox &box) override;
     void translate(int dx, int dy) override;
+    void scale(double s)override;
+    void rotate(double angle)override;
+    Point getCenter()override;
+    void drawCenter()override;
 private:
     void calcPoints() override;
 };

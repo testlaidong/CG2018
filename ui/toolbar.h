@@ -2,6 +2,8 @@
 #define TOOLBAR_H
 
 #include <QToolBar>
+#include <QLabel>
+#include <QPushButton>
 
 class ToolBar : public QToolBar
 {
@@ -21,7 +23,10 @@ public slots:
     void onRectangleClicked();
     void onPolygonClicked();
     void onSelectClicked();
-
+    void onEnlargeClicked();
+    void onNarrowClicked();
+    void onRotateRightClicked();
+    void onRotateLeftClicked();
 
 private:
     QAction                 *m_Line;

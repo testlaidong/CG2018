@@ -31,7 +31,6 @@ protected:
 
 private:
     vector<IShape *>shapes;
-    IShape *selected;
     BoundingBox box;
     map<Mode, FigureGenerator *>drawers;
     map<Mode, Editor *>editors;

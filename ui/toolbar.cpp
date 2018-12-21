@@ -3,7 +3,10 @@
 #include "common/common.h"
 
 #include <iostream>
+#include <cmath>
 using namespace std;
+
+#include <QPushButton>
 
 ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
 {
@@ -31,8 +34,8 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addAction(m_Polygon);
     this->addSeparator();
     this->addAction(m_Select);
-    this->addAction(m_enlarge);
     this->addAction(m_narrow);
+    this->addAction(m_enlarge);
     this->addAction(m_rotateRight);
     this->addAction(m_rotateLeft);
     this->addAction(m_Fill);
@@ -46,6 +49,10 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     connect(m_Polygon, SIGNAL(triggered()), this, SLOT(onPolygonClicked()));
     connect(m_Rectangle, SIGNAL(triggered()), this, SLOT(onRectangleClicked()));
     connect(m_Select, SIGNAL(triggered()), this, SLOT(onSelectClicked()));
+    connect(m_enlarge, SIGNAL(triggered()), this, SLOT(onEnlargeClicked()));
+    connect(m_narrow, SIGNAL(triggered()), this, SLOT(onNarrowClicked()));
+    connect(m_rotateLeft, SIGNAL(triggered()), this, SLOT(onRotateLeftClicked()));
+    connect(m_rotateRight, SIGNAL(triggered()), this, SLOT(onRotateRightClicked()));
 }
 
 void ToolBar::onLineClicked()
@@ -95,5 +102,49 @@ void ToolBar::onPolygonClicked()
 void ToolBar::onSelectClicked()
 {
     m_Select->setChecked(true);
-    mode = Mode::MODE_SELECT;
+    mode = Mode::MODE_SELECT;\
+}
+
+void ToolBar::onNarrowClicked()
+{
+    if(selected)
+    {
+        selected->scale(0.9);
+        selected->update();
+        selected->bound(*boundingBox);
+        pWidget->update();
+    }
+}
+
+void ToolBar::onEnlargeClicked()
+{
+    if(selected)
+    {
+        selected->scale(1.1);
+        selected->update();
+        selected->bound(*boundingBox);
+        pWidget->update();
+    }
+}
+
+void ToolBar::onRotateRightClicked()
+{
+    if(selected)
+    {
+        selected->rotate(M_PI / 2);
+        selected->update();
+        selected->bound(*boundingBox);
+        pWidget->update();
+    }
+}
+
+void ToolBar::onRotateLeftClicked()
+{
+    if(selected)
+    {
+        selected->rotate( - M_PI / 2);
+        selected->update();
+        selected->bound(*boundingBox);
+        pWidget->update();
+    }
 }

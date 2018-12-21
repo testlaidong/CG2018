@@ -51,7 +51,7 @@ void PaintWidget::PaintWidget::initializeGL()
 
 void PaintWidget::resetSelector()
 {
-    this->selected = nullptr;
+    selected = nullptr;
     update();
 }
 
@@ -96,6 +96,7 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
                 {
                     s->bound(box);
                     selected = s;
+                    boundingBox = &box;
                     selectedOne = true;
                     editors[selected->type()]->setEdit(selected, &box);
                     break;

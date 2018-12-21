@@ -18,7 +18,7 @@ class LineEditor: public Editor
 
 public:
     LineEditor();
-    void setEdit(IShape *shape, BoundingBox *box) override;
+    void setEdit(IShape *, BoundingBox *) override;
     void mousePressEvent(QMouseEvent *)override;
     void mouseMoveEvent(QMouseEvent *)override;
     void mouseReleaseEvent(QMouseEvent * )override;

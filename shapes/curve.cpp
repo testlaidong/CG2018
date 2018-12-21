@@ -26,6 +26,7 @@ void Curve::drawControlPoints()
         Line(control_points[i], control_points[i+1], true).draw();
     for(auto p: control_points)
         p.drawCircle();
+    drawCenter();
 }
 
 void Curve::calcPoints()
@@ -101,4 +102,39 @@ void Curve::translate(int dx, int dy)
 void Curve::update()
 {
     calcPoints();
+}
+
+bool Curve::spectialPoint(Point p)
+{
+    return boolControlPoint(p);
+}
+
+void Curve::scale(double s)
+{
+    auto center = getCenter();
+    for(size_t i = 0; i < control_points.size(); i++)
+        control_points[i].scale(center, s);
+}
+
+void Curve::rotate(double angle)
+{
+    auto center = getCenter();
+    for(size_t i = 0; i < control_points.size(); i++)
+        control_points[i].rotate(center, angle);
+}
+
+Point Curve::getCenter()
+{
+    int cx = 0, cy = 0;
+    for(auto p: control_points)
+    {
+        cx += p.getX();
+        cy += p.getY();
+    }
+    return Point(cx / control_points.size(), cy / control_points.size());
+}
+
+void Curve::drawCenter()
+{
+    getCenter().drawCircle(255, 215, 0);
 }

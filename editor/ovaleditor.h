@@ -16,17 +16,13 @@ class OvalEditor: public Editor
         TOP_LEFT,
         TOP_RIGHT,
         BOTTOM_LEFT,
-        BOTTOM_RIGHT,
-        TOP,
-        LEFT,
-        RIGHT,
-        BOTTOM
+        BOTTOM_RIGHT
     }editMode;
     Point *pold;
 
 public:
     OvalEditor();
-    void setEdit(IShape *shape, BoundingBox *box) override;
+    void setEdit(IShape *, BoundingBox *) override;
     void mousePressEvent(QMouseEvent *)override;
     void mouseMoveEvent(QMouseEvent *)override;
     void mouseReleaseEvent(QMouseEvent * )override;

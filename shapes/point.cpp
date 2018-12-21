@@ -22,11 +22,11 @@ void Point::draw()
     glEnd();
 }
 
-void Point::drawCircle()
+void Point::drawCircle(int r, int g, int b)
 {
 
     glBegin(GL_POLYGON);
-    glColor3f(0.0, 0.0, 1.0);
+    glColor3f(r, g, b);
     int n = 100;
     GLfloat R = 5.0f;
     GLfloat pi = 3.1415926536f;
@@ -66,4 +66,18 @@ void Point::translate(int dx, int dy)
 {
     x += dx;
     y += dy;
+}
+
+void Point::scale(Point center, double s)
+{
+    auto x0 = x * s + center.getX()*(1 - s);
+    auto y0 = y * s + center.getY()*(1 - s);
+    reset(static_cast<int>(x0), static_cast<int>(y0));
+}
+
+void Point::rotate(Point r, double angle)
+{
+    auto x0 = r.getX() + (x - r.getX()) * cos(angle) - (y - r.getY()) * sin(angle);
+    auto y0 = r.getY() + (x - r.getX()) * sin(angle) + (y - r.getY()) * cos(angle);
+    reset(static_cast<int>(x0), static_cast<int>(y0));
 }

@@ -86,10 +86,10 @@ void Oval::draw()
 
 void Oval::drawControlPoints()
 {
-    auto center = Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
+    auto center = getCenter();
+    drawCenter();
     int rx = abs(end.getX() - start.getX()) >> 1;
     int ry = abs(end.getY() - start.getY()) >> 1;
-    center.drawCircle();
     auto pl = Point(center.getX() - rx, center.getY());
     auto pr = Point(center.getX() + rx, center.getY());
     Line(pl, pr, true).draw();
@@ -98,20 +98,27 @@ void Oval::drawControlPoints()
     Line(pt, pb, true).draw();
     start.drawCircle();
     end.drawCircle();
-    Point(start.getX() + rx, start.getY()).drawCircle();
     Point(end.getX(), start.getY()).drawCircle();
-    Point(start.getX(), start.getY() + ry).drawCircle();
-    Point(end.getX(), start.getY() + ry).drawCircle();
     Point(start.getX(), end.getY()).drawCircle();
-    Point(start.getX() + rx, end.getY()).drawCircle();
 }
 
 void Oval::bound(BoundingBox & box)
 {
-    box.setLeft(min(start.getX(), end.getX()));
-    box.setRight(max(start.getX(), end.getX()));
-    box.setTop(min(start.getY(), end.getY()));
-    box.setBottom(max(start.getY(), end.getY()));
+    auto minx = 10000;
+    auto miny = 10000;
+    auto maxx = 0;
+    auto maxy = 0;
+    for(auto p: points)
+    {
+        minx = min(minx, p.getX());
+        maxx = max(maxx, p.getX());
+        miny = min(miny, p.getY());
+        maxy = max(maxy, p.getY());
+    }
+    box.setLeft(minx);
+    box.setRight(maxx);
+    box.setTop(miny);
+    box.setBottom(maxy);
 }
 
 void Oval::update()
@@ -119,6 +126,7 @@ void Oval::update()
     calcPoints();
 }
 
+//TODO() 这两个函数有bug
 Point& Oval::topleft()
 {
     if(start <= end)
@@ -175,48 +183,38 @@ void Oval::moveBottomRight(Point p)
     bottomRight() = p;
 }
 
-bool Oval::isTopCenter(Point p)
-{
-    return p == Point((topleft().getX() + bottomRight().getX()) / 2, topleft().getY());
-}
-
-void Oval::moveTopCenter(Point p)
-{
-    topleft().translate(0, p.getY() - topleft().getY());
-}
-
-bool Oval::isLeftCenter(Point p)
-{
-    return p == Point(topleft().getX(), (topleft().getY() + bottomRight().getY()) / 2);
-}
-
-void Oval::moveLeftCenter(Point p)
-{
-    topleft().translate(p.getX() - topleft().getX(), 0);
-}
-
-bool Oval::isRightCenter(Point p)
-{
-    return p == Point(bottomRight().getX(), (topleft().getY() + bottomRight().getY()) / 2);
-}
-
-void Oval::moveRightCenter(Point p)
-{
-    bottomRight().translate(p.getX() - bottomRight().getX(), 0);
-}
-
-bool Oval::isBottomCenter(Point p)
-{
-    return p == Point((topleft().getX() + bottomRight().getX()) / 2, bottomRight().getY());
-}
-
-void Oval::moveBottomCenter(Point p)
-{
-    bottomRight().translate(0, p.getY() - bottomRight().getY());
-}
-
 void Oval::translate(int dx, int dy)
 {
     start.translate(dx, dy);
     end.translate(dx, dy);
+}
+
+bool Oval::spectialPoint(Point p)
+{
+    return isTopLeft(p) || isTopRight(p) || isBottomLeft(p) || isBottomRight(p);
+}
+
+void Oval::scale(double s)
+{
+    auto center = getCenter();
+    start.scale(center, s);
+    end.scale(center, s);
+}
+
+void Oval::rotate(double angle)
+{
+    auto center = getCenter();
+    start.rotate(center, angle);
+    end.rotate(center, angle);
+}
+
+
+Point Oval::getCenter()
+{
+    return  Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
+}
+
+void Oval::drawCenter()
+{
+    getCenter().drawCircle(255, 215, 0);
 }

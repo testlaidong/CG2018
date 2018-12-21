@@ -20,9 +20,13 @@ public:
     virtual void bound(BoundingBox&){}
     virtual void draw(){}
     virtual void drawControlPoints(){}
-    virtual bool spectialPoint(Point p){}
+    virtual bool spectialPoint(Point ){return false;}
     virtual void update(){}
-    virtual void translate(int dx, int dy){}
+    virtual void translate(int , int ){}
+    virtual void scale(double ){}
+    virtual void rotate(double ){}
+    virtual Point getCenter(){}
+    virtual void drawCenter(){}
     Mode type(){return _type;}
     bool selected(Point p)
     {

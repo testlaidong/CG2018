@@ -74,7 +74,7 @@ void Line::calcPoints()
     }
     if(dash)
     {
-        for(int i = 0; i < points.size(); i++)
+        for(size_t i = 0; i < points.size(); i++)
             points[i].setRGB(0, 0, 1);
     }
 }
@@ -110,6 +110,7 @@ void Line::drawControlPoints()
 {
     p0.drawCircle();
     p1.drawCircle();
+    drawCenter();
 }
 
 bool Line::spectialPoint(Point p)
@@ -135,4 +136,29 @@ void Line::translate(int dx, int dy)
 {
     p0.translate(dx, dy);
     p1.translate(dx, dy);
+}
+
+void Line::scale(double s)
+{
+    auto center = Point((p0.getX() + p1.getX())/2, (p0.getY()+p1.getY())/2);
+    p0.scale(center, s);
+    p1.scale(center, s);
+}
+
+void Line::rotate(double angle)
+{
+    auto center = getCenter();
+    p0.rotate(center, angle);
+    p1.rotate(center, angle);
+}
+
+Point Line::getCenter()
+{
+    return Point((p0.getX() + p1.getX())/2, (p0.getY()+p1.getY())/2);
+}
+
+void Line::drawCenter()
+{
+    auto center = getCenter();
+    center.drawCircle(255, 215, 0);
 }

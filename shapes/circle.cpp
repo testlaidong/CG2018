@@ -35,7 +35,7 @@ void Circle::draw()
 
 void Circle::drawControlPoints()
 {
-    center.drawCircle();
+    center.drawCircle(255, 215, 0);
     auto p0 = center;
     auto p1 = Point(center.getX() + radius, center.getY());
     Line(p0, p1, true).draw();
@@ -103,4 +103,19 @@ void Circle::translate(int dx, int dy)
 void Circle::update()
 {
     calcPoints();
+}
+
+bool Circle::spectialPoint(Point p)
+{
+    return selected(p);
+}
+
+void Circle::scale(double s)
+{
+    radius *= s;
+}
+
+void Circle::rotate(double angle)
+{
+    //do nothing
 }

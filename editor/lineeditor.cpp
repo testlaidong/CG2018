@@ -45,7 +45,7 @@ void LineEditor::mouseMoveEvent(QMouseEvent *e)
     line->bound(*box);
 }
 
-void LineEditor::mouseReleaseEvent(QMouseEvent * e)
+void LineEditor::mouseReleaseEvent(QMouseEvent * )
 {
     editMode = EditMode::NONE;
 }

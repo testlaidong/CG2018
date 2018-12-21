@@ -8,7 +8,7 @@
 class Editor
 {
 public:
-    virtual void setEdit(IShape *shape, BoundingBox *box){}
+    virtual void setEdit(IShape *, BoundingBox *){}
     virtual void mousePressEvent(QMouseEvent *){}
     virtual void mouseMoveEvent(QMouseEvent *){}
     virtual void mouseReleaseEvent(QMouseEvent * ){}

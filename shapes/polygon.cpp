@@ -51,6 +51,7 @@ void Poly::drawControlPoints()
 {
     for(auto p: vertexs)
         p.drawCircle();
+    drawCenter();
 }
 
 void Poly::bound(BoundingBox & box)
@@ -89,4 +90,39 @@ void Poly::translate(int dx, int dy)
 {
     for(size_t i = 0; i < vertexs.size(); i++)
         vertexs[i].translate(dx, dy);
+}
+
+bool Poly::spectialPoint(Point p)
+{
+    return boolVertex(p);
+}
+
+void Poly::scale(double s)
+{
+    auto center = getCenter();
+    for(size_t i = 0; i < vertexs.size(); i++)
+        vertexs[i].scale(center, s);
+}
+
+void Poly::drawCenter()
+{
+    getCenter().drawCircle(255, 215, 0);
+}
+
+Point Poly::getCenter()
+{
+    int cx = 0, cy = 0;
+    for(auto p: vertexs)
+    {
+        cx += p.getX();
+        cy += p.getY();
+    }
+    return Point(cx / vertexs.size(), cy / vertexs.size());
+}
+
+void Poly::rotate(double angle)
+{
+    auto center = getCenter();
+    for(size_t i = 0; i < vertexs.size(); i++)
+        vertexs[i].rotate(center, angle);
 }

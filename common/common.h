@@ -5,8 +5,11 @@
 #include "drawer/drawer.h"
 #include "mode.h"
 
+
 extern Mode mode;
 extern std::map<Mode, FigureGenerator *> *drawers_ref;
+extern IShape* selected;
+extern BoundingBox* boundingBox;
 
 class PaintWidget;
 extern PaintWidget *pWidget;

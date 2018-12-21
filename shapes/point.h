@@ -12,8 +12,10 @@ public:
     void setRGB(int r, int g, int b);
     void reset(int x, int y);
     void draw();
-    void drawCircle();
+    void drawCircle(int r = 0, int g = 0, int b = 1);
     void translate(int dx, int dy);
+    void scale(Point center, double s);
+    void rotate(Point center, double angle);
     int getX(){return x;}
     int getY() {return y;}
     bool operator ==(const Point& d);

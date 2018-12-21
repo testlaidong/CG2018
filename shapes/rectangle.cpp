@@ -42,6 +42,7 @@ void Rect::drawControlPoints()
 {
     start.drawCircle();
     end.drawCircle();
+    drawCenter();
     Point(end.getX(), start.getY()).drawCircle();
     Point(start.getX(), end.getY()).drawCircle();
 }
@@ -121,4 +122,31 @@ void Rect::translate(int dx, int dy)
     end.translate(dx, dy);
 }
 
+bool Rect::spectialPoint(Point p)
+{
+    return isTopLeft(p) || isTopRight(p) || isBottomLeft(p) || isBottomRight(p);
+}
 
+void Rect::scale(double s)
+{
+    auto center = getCenter();
+    start.scale(center, s);
+    end.scale(center, s);
+}
+
+void Rect::rotate(double angle)
+{
+    auto center = getCenter();
+    start.rotate(center, angle);
+    end.rotate(center, angle);
+}
+
+Point Rect::getCenter()
+{
+    return Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
+}
+
+void Rect::drawCenter()
+{
+    getCenter().drawCircle(255, 215, 0);
+}

@@ -15,10 +15,15 @@ public:
     bool close();
     void draw()override;
     void drawControlPoints()override;
+    Point getCenter()override;
+    void drawCenter()override;
     void bound(BoundingBox& box)override;
     Point* boolVertex(Point p);
     void update()override;
     void translate(int dx, int dy)override;
+    void scale(double s)override;
+    void rotate(double angle)override;
+    bool spectialPoint(Point p)override;
 private:
     void calcPoints()override;
 };
