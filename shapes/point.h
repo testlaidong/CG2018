@@ -1,6 +1,8 @@
 #ifndef POINT_H
 #define POINT_H
 
+struct Color;
+
 class Point
 {
     int x;
@@ -10,6 +12,7 @@ public:
     Point(){}
     Point(int x, int y);
     void setRGB(int r, int g, int b);
+    void setColor(Color color);
     void reset(int x, int y);
     void draw();
     void drawCircle(int r = 0, int g = 0, int b = 1);
@@ -22,5 +25,18 @@ public:
     int operator -(const Point& d);
     bool operator <= (const Point& d);
 };
+
+struct Color
+{
+    int r;
+    int g;
+    int b;
+    Color(){}
+    Color(int red, int green, int blue): r(red), g(green), b(blue){}
+};
+
+#define BLACK Color(0, 0, 0)
+#define BLUE Color(0, 0, 1)
+#define YELLOW Color(255, 255, 0)
 
 #endif // POINT_H

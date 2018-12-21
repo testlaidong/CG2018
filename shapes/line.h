@@ -9,9 +9,10 @@ class Line: public IShape
     Point p0;
     Point p1;
     bool dash;
+    Color color;
 public:
     Line(Point p0);
-    Line(Point p0, Point p1, bool dash = false);
+    Line(Point p0, Point p1, bool dash = false, Color color = BLACK);
     void setEnd(int x, int y);
     void draw()override;
     void drawControlPoints()override;
@@ -23,7 +24,7 @@ public:
     void scale(double s)override;
     void rotate(double angle)override;
     Point getCenter()override;
-    void drawCenter()override;
+    bool clip(int, int, int, int)override;
 private:
     void calcPoints() override;
 };

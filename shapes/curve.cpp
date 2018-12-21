@@ -23,9 +23,12 @@ size_t Curve::nrControlPoints()
 void Curve::drawControlPoints()
 {
     for(unsigned i = 0; i < control_points.size() - 1; i++)
-        Line(control_points[i], control_points[i+1], true).draw();
+        Line(control_points[i], control_points[i+1], true, BLUE).draw();
     for(auto p: control_points)
+    {
+        p.setColor(BLUE);
         p.drawCircle();
+    }
     drawCenter();
 }
 
@@ -132,9 +135,4 @@ Point Curve::getCenter()
         cy += p.getY();
     }
     return Point(cx / control_points.size(), cy / control_points.size());
-}
-
-void Curve::drawCenter()
-{
-    getCenter().drawCircle(255, 215, 0);
 }

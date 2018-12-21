@@ -24,6 +24,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     m_narrow = new QAction(QIcon(":/images/minus.png"), nullptr, this);
     m_rotateRight = new QAction(QIcon(":/images/rotate_right.png"), nullptr, this);
     m_rotateLeft = new QAction(QIcon(":/images/rotate_left.png"), nullptr, this);
+    m_Cut = new QAction(QIcon(":/images/cut.png"), nullptr, this);
 
 
     this->addAction(m_Line);
@@ -38,6 +39,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addAction(m_enlarge);
     this->addAction(m_rotateRight);
     this->addAction(m_rotateLeft);
+    this->addAction(m_Cut);
     this->addAction(m_Fill);
     this->addSeparator();
 
@@ -53,6 +55,21 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     connect(m_narrow, SIGNAL(triggered()), this, SLOT(onNarrowClicked()));
     connect(m_rotateLeft, SIGNAL(triggered()), this, SLOT(onRotateLeftClicked()));
     connect(m_rotateRight, SIGNAL(triggered()), this, SLOT(onRotateRightClicked()));
+    connect(m_Cut, SIGNAL(triggered()), this, SLOT(onCutClicked()));
+}
+
+void ToolBar::onCutClicked()
+{
+    if(cutBox != nullptr)
+    {
+        if(selected != nullptr)
+        {
+            selected->clip(cutBox->left(), cutBox->top(), cutBox->right(), cutBox->bottom());
+        }
+    }
+    cutBox = nullptr;
+    pWidget->update();
+    mode = Mode::MODE_CUT;
 }
 
 void ToolBar::onLineClicked()

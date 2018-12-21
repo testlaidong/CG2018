@@ -59,7 +59,7 @@ void BoundingBox::draw()
 {
     Point ps[] = {Point(left, top), Point(right, top), Point(right, bottom), Point(left, bottom), Point(left, top)};
     for(int i = 0; i < 4; i++)
-        Line(ps[i], ps[i+1], true).draw();
+        Line(ps[i], ps[i+1], true, BLUE).draw();
 }
 
 bool BoundingBox::in(int x, int y)

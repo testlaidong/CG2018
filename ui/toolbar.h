@@ -27,6 +27,7 @@ public slots:
     void onNarrowClicked();
     void onRotateRightClicked();
     void onRotateLeftClicked();
+    void onCutClicked();
 
 private:
     QAction                 *m_Line;
@@ -40,6 +41,7 @@ private:
     QAction                 *m_narrow;
     QAction                 *m_rotateRight;
     QAction                 *m_rotateLeft;
+    QAction                 *m_Cut;
     QAction                 *m_Fill;
 };
 

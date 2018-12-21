@@ -22,7 +22,6 @@ public:
     void update()override;
     bool spectialPoint(Point p)override;
     Point getCenter()override;
-    void drawCenter()override;
 private:
     void calcPoints()override;
 };

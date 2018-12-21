@@ -30,6 +30,8 @@ void PolyEditor::mouseMoveEvent(QMouseEvent *e)
 {
     if(editMode == EditMode::EDIT_VERTEX)
     {
+        if(poly->firstVertex(*pcur))
+            poly->setLastVertex(Point(e->x(), e->y()));
         pcur->reset(e->x(), e->y());
     }
     else if(editMode == EditMode::MOVE)

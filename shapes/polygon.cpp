@@ -25,6 +25,7 @@ bool Poly::close()
 {
     if(vertexs[vertexs.size() - 1] == vertexs[0] and vertexs.size() >= 3)
     {
+        //vertexs.pop_back();
         vertexs[vertexs.size() - 1] = vertexs[0];
         return true;
     }
@@ -104,11 +105,6 @@ void Poly::scale(double s)
         vertexs[i].scale(center, s);
 }
 
-void Poly::drawCenter()
-{
-    getCenter().drawCircle(255, 215, 0);
-}
-
 Point Poly::getCenter()
 {
     int cx = 0, cy = 0;
@@ -125,4 +121,14 @@ void Poly::rotate(double angle)
     auto center = getCenter();
     for(size_t i = 0; i < vertexs.size(); i++)
         vertexs[i].rotate(center, angle);
+}
+
+bool Poly::firstVertex(Point p)
+{
+    return p == vertexs[0];
+}
+
+bool Poly::clip(int xmin, int ymin, int xmax, int ymax)
+{
+
 }

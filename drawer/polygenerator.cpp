@@ -17,7 +17,9 @@ void PolygonGenerator::mousePressEvent(QMouseEvent *event)
     {
         polygon->addVertex(Point(event->x(), event->y()));
         if(polygon->close())
+        {
             polygon = nullptr;
+        }
     }
 }
 
@@ -27,6 +29,7 @@ void PolygonGenerator::mouseMoveEvent(QMouseEvent *event)
         polygon->setLastVertex(Point(event->x(), event->y()));
 }
 
-void PolygonGenerator::mouseReleaseEvent(QMouseEvent * event)
+void PolygonGenerator::mouseReleaseEvent(QMouseEvent *)
 {
+
 }

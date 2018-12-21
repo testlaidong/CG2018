@@ -38,7 +38,7 @@ void Circle::drawControlPoints()
     center.drawCircle(255, 215, 0);
     auto p0 = center;
     auto p1 = Point(center.getX() + radius, center.getY());
-    Line(p0, p1, true).draw();
+    Line(p0, p1, true, BLUE).draw();
 }
 
 void Circle::calcPoints()

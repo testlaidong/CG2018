@@ -92,10 +92,10 @@ void Oval::drawControlPoints()
     int ry = abs(end.getY() - start.getY()) >> 1;
     auto pl = Point(center.getX() - rx, center.getY());
     auto pr = Point(center.getX() + rx, center.getY());
-    Line(pl, pr, true).draw();
+    Line(pl, pr, true, BLUE).draw();
     auto pt = Point(center.getX(), center.getY() - ry);
     auto pb = Point(center.getX(), center.getY() + ry);
-    Line(pt, pb, true).draw();
+    Line(pt, pb, true, BLUE).draw();
     start.drawCircle();
     end.drawCircle();
     Point(end.getX(), start.getY()).drawCircle();
@@ -212,9 +212,4 @@ void Oval::rotate(double angle)
 Point Oval::getCenter()
 {
     return  Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
-}
-
-void Oval::drawCenter()
-{
-    getCenter().drawCircle(255, 215, 0);
 }

@@ -11,11 +11,12 @@ Line::Line(Point p0)
     _type = Mode::MODE_DRAW_LINE;
 }
 
-Line::Line(Point p0, Point p1, bool dash)
+Line::Line(Point p0, Point p1, bool dash, Color color)
 {
     this->p0 = p0;
     this->p1 = p1;
     this->dash = dash;
+    this->color = color;
     calcPoints();
     _type = Mode::MODE_DRAW_LINE;
 }
@@ -69,14 +70,10 @@ void Line::calcPoints()
             y0 += stepy;
             fraction += dx;
             points.push_back(Point(x0, y0));
-
         }
     }
-    if(dash)
-    {
-        for(size_t i = 0; i < points.size(); i++)
-            points[i].setRGB(0, 0, 1);
-    }
+    for(size_t i = 0; i < points.size(); i++)
+        points[i].setRGB(color.r, color.g, color.b);
 }
 
 void Line::bound(BoundingBox &box)
@@ -157,8 +154,7 @@ Point Line::getCenter()
     return Point((p0.getX() + p1.getX())/2, (p0.getY()+p1.getY())/2);
 }
 
-void Line::drawCenter()
+bool Line::clip(int xmin, int ymin, int xmax, int ymax)
 {
-    auto center = getCenter();
-    center.drawCircle(255, 215, 0);
+
 }

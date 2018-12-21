@@ -146,7 +146,7 @@ Point Rect::getCenter()
     return Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
 }
 
-void Rect::drawCenter()
+bool Rect::clip(int xmin, int ymin, int xmax, int ymax)
 {
-    getCenter().drawCircle(255, 215, 0);
+
 }

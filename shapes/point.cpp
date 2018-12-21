@@ -14,6 +14,13 @@ void Point::setRGB(int r, int g, int b)
     this->b = b;
 }
 
+void Point::setColor(Color color)
+{
+    this->r = color.r;
+    this->g = color.g;
+    this->b = color.b;
+}
+
 void Point::draw()
 {
     glBegin(GL_POINTS);
@@ -26,9 +33,9 @@ void Point::drawCircle(int r, int g, int b)
 {
 
     glBegin(GL_POLYGON);
-    glColor3f(r, g, b);
+    glColor3f(this->r, this->g, this->b);
     int n = 100;
-    GLfloat R = 5.0f;
+    GLfloat R = 3.0f;
     GLfloat pi = 3.1415926536f;
     for(int i=0;i<n;i++)
         glVertex2f(x+R*cos(2*pi/n*i), y+R*sin(2*pi/n*i));

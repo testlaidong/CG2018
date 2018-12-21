@@ -5,3 +5,4 @@ std::map<Mode, FigureGenerator *> *drawers_ref;
 PaintWidget *pWidget = nullptr;
 IShape *selected = nullptr;
 BoundingBox* boundingBox = nullptr;
+CutBox* cutBox = nullptr;

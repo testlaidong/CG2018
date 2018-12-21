@@ -65,6 +65,11 @@ void PaintWidget::paintGL()
             box.draw();
             selected->drawControlPoints();
         }
+        if(cutBox != nullptr)
+        {
+            cutBox->draw();
+            cutBox->drawControlPoints();
+        }
         for(auto shape: shapes)
             shape->draw();
 }
@@ -80,9 +85,9 @@ void PaintWidget::resizeGL(int width, int height)
 
 void PaintWidget::mousePressEvent(QMouseEvent *event)
  {
+    auto p = Point(event->x(), event->y());
     if(mode == Mode::MODE_SELECT)
     {
-        auto p = Point(event->x(), event->y());
         //如果在图形选择模式下，如果selected不为空(已经有图形处于选中状态)，且点击位置位于box内部，选中的图形不变
         if(selected != nullptr and (selected->spectialPoint(p) or box.in(event->x(), event->y())))
             editors[selected->type()]->mousePressEvent(event);
@@ -103,6 +108,20 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
                 }
         }
     }
+    else if(mode == Mode::MODE_CUT)
+    {
+        if(cutBox == nullptr)
+            cutBox = new CutBox(p, p);
+        else if(cutBox->spectialPoint(p) or cutBox->in(p))
+        {
+            cutBox->mousePressEvent(event);
+        }
+        else
+        {
+            delete cutBox;
+            cutBox = nullptr;
+        }
+    }
     else
     {
         if(mode != Mode::MODE_NONE)
@@ -120,6 +139,11 @@ void PaintWidget::mouseMoveEvent(QMouseEvent *event)
             editors[selected->type()]->mouseMoveEvent(event);
         setMouseTracking(true);
     }
+    else if(mode == Mode::MODE_CUT)
+    {
+        if(cutBox != nullptr)
+            cutBox->mouseMoveEvent(event);
+    }
     else{
         if(mode != Mode::MODE_NONE)
             drawers[mode]->mouseMoveEvent(event);
@@ -133,6 +157,11 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent * event)
     {
         if(selected != nullptr)
             editors[selected->type()]->mouseReleaseEvent(event);
+    }
+    else if(mode == Mode::MODE_CUT)
+    {
+        if(cutBox != nullptr)
+            cutBox->mouseReleaseEvent(event);
     }
     else
     {

@@ -55,7 +55,8 @@ SOURCES += \
     editor/ovaleditor.cpp \
     editor/curveeditor.cpp \
     editor/recteditor.cpp \
-    editor/polyeditor.cpp
+    editor/polyeditor.cpp \
+    common/cutbox.cpp
 
 
 HEADERS += \
@@ -86,7 +87,8 @@ HEADERS += \
     editor/ovaleditor.h \
     editor/curveeditor.h \
     editor/recteditor.h \
-    editor/polyeditor.h
+    editor/polyeditor.h \
+    common/cutbox.h
 
 FORMS += \
         mainwindow.ui

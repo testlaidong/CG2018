@@ -9,7 +9,6 @@
 #include <iostream>
 using namespace std;
 
-
 class IShape
 {
 protected:
@@ -20,13 +19,19 @@ public:
     virtual void bound(BoundingBox&){}
     virtual void draw(){}
     virtual void drawControlPoints(){}
-    virtual bool spectialPoint(Point ){return false;}
+    virtual bool spectialPoint(Point){return false;}
     virtual void update(){}
     virtual void translate(int , int ){}
     virtual void scale(double ){}
     virtual void rotate(double ){}
     virtual Point getCenter(){}
-    virtual void drawCenter(){}
+    void drawCenter()
+    {
+        auto center = getCenter();
+        center.setColor(YELLOW);
+        getCenter().drawCircle();
+    }
+    virtual bool clip(int, int, int, int){}
     Mode type(){return _type;}
     bool selected(Point p)
     {

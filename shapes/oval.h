@@ -14,7 +14,6 @@ public:
     void draw() override;
     void drawControlPoints()override;    
     Point getCenter()override;
-    void drawCenter()override;
 
     void bound(BoundingBox& box)override;
     Point& topleft();
