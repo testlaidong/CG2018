@@ -6,3 +6,10 @@ PaintWidget *pWidget = nullptr;
 IShape *selected = nullptr;
 BoundingBox* boundingBox = nullptr;
 CutBox* cutBox = nullptr;
+vector<IShape *>*shapes_ref = nullptr;
+
+void resetCutBox()
+{
+    delete cutBox;
+    cutBox = nullptr;
+}

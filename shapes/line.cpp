@@ -154,7 +154,49 @@ Point Line::getCenter()
     return Point((p0.getX() + p1.getX())/2, (p0.getY()+p1.getY())/2);
 }
 
-bool Line::clip(int xmin, int ymin, int xmax, int ymax)
+void Line::clip(int xmin, int ymin, int xmax, int ymax)
 {
+    auto dx = p1.getX() - p0.getX();
+    auto dy = p1.getY() - p0.getY();
+    int p[] = {-dx, dx, -dy, dy};
+    int q[] = {p0.getX() - xmin, xmax - p0.getX(), p0.getY() - ymin, ymax - p0.getY()};
+    double u1 = 0;
+    double u2 = 1;
+    for(size_t i = 0; i < 4; i++)
+    {
+        if(p[i] == 0)
+        {
+            if(q[i] < 0)
+                return;
+        }
+        else
+        {
+            double r = (static_cast<double>(q[i])) / p[i];
+            if(p[i] < 0)
+                u1 = max(u1, r);
+            else
+                u2 = min(u2, r);
+        }
+    }
+    if(u1 > u2)
+        return;
+    auto x0 = static_cast<int>(p0.getX() + u1 * dx);
+    auto y0 = static_cast<int>(p0.getY() + u1 * dy);
+    auto x1 = static_cast<int>(p0.getX() + u2 * dx);
+    auto y1 = static_cast<int>(p0.getY() + u2 * dy);
+    p0.reset(x0, y0);
+    p1.reset(x1, y1);
+    update();
+}
 
+Point Line::intersectX(int x)
+{
+    double k = static_cast<double>(p1.getY()-p0.getY())/(p1.getX()-p0.getX());
+    return Point(x, int(k*(x-p0.getX()) + p0.getY() + 0.5));
+}
+
+Point Line::intersectY(int y)
+{
+    double m = static_cast<double>(p1.getX()-p0.getX())/(p1.getY()-p0.getY());
+    return Point(int(m*(y-p0.getY()) + p0.getX() + 0.5), y);
 }

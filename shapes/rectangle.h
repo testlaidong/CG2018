@@ -38,7 +38,7 @@ public:
     void rotate(double angle)override;
 
     bool spectialPoint(Point p)override;
-    bool clip(int, int, int, int)override;
+    void clip(int, int, int, int)override;
 
 protected:
     void calcPoints()override;

@@ -146,7 +146,22 @@ Point Rect::getCenter()
     return Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
 }
 
-bool Rect::clip(int xmin, int ymin, int xmax, int ymax)
+void Rect::clip(int xmin, int ymin, int xmax, int ymax)
 {
+    //计算待裁剪矩形的四个边界
+    auto xa1 = min(start.getX(), end.getX());
+    auto xa2 = max(start.getX(), end.getX());
+    auto ya1 = min(start.getY(), end.getY());
+    auto ya2 = max(start.getY(), end.getY());
 
+    auto xc1 = max(xa1, xmin);
+    auto yc1 = max(ya1, ymin);
+    auto xc2 = min(xa2, xmax);
+    auto yc2 = min(ya2, ymax);
+
+    if(not (xc1 <= xc2 and yc1 <= yc2))
+        return;
+    start = Point(xc1, yc1);
+    end = Point(xc2, yc2);
+    update();
 }

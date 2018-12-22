@@ -24,7 +24,11 @@ public:
     void scale(double s)override;
     void rotate(double angle)override;
     Point getCenter()override;
-    bool clip(int, int, int, int)override;
+    void clip(int, int, int, int)override;
+    //给定x计算y
+    Point intersectX(int x);
+    //给定y计算x
+    Point intersectY(int y);
 private:
     void calcPoints() override;
 };

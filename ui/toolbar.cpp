@@ -19,12 +19,14 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     m_Polygon = new QAction(QIcon(":/images/polygon.png"), nullptr, this);
     m_Rectangle = new QAction(QIcon(":/images/rectangle.png"), nullptr, this);
     m_Select = new QAction(QIcon(":/images/select.png"), nullptr, this);
-    m_Fill = new QAction(QIcon(":/images/fill.jpg"), nullptr, this);
+    m_Fill = new QAction(QIcon(":/images/fill.png"), nullptr, this);
     m_enlarge = new QAction(QIcon(":/images/add.png"), nullptr, this);
     m_narrow = new QAction(QIcon(":/images/minus.png"), nullptr, this);
     m_rotateRight = new QAction(QIcon(":/images/rotate_right.png"), nullptr, this);
     m_rotateLeft = new QAction(QIcon(":/images/rotate_left.png"), nullptr, this);
     m_Cut = new QAction(QIcon(":/images/cut.png"), nullptr, this);
+    m_Delete = new QAction(QIcon(":/images/clear.png"), nullptr, this);
+    m_Save = new QAction(QIcon(":/images/save.png"), nullptr, this);
 
 
     this->addAction(m_Line);
@@ -42,6 +44,8 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addAction(m_Cut);
     this->addAction(m_Fill);
     this->addSeparator();
+    this->addAction(m_Delete);
+    this->addAction(m_Save);
 
 
     connect(m_Line, SIGNAL(triggered()), this, SLOT(onLineClicked()));
@@ -65,9 +69,16 @@ void ToolBar::onCutClicked()
         if(selected != nullptr)
         {
             selected->clip(cutBox->left(), cutBox->top(), cutBox->right(), cutBox->bottom());
+            selected->bound(*boundingBox);
+        }
+        else
+        {
+            for(size_t i = 0; i < shapes_ref->size(); i++)
+            {
+                shapes_ref->at(i)->clip(cutBox->left(), cutBox->top(), cutBox->right(), cutBox->bottom());
+            }
         }
     }
-    cutBox = nullptr;
     pWidget->update();
     mode = Mode::MODE_CUT;
 }
@@ -78,6 +89,7 @@ void ToolBar::onLineClicked()
     m_Line->setChecked(TRUE);
     pWidget->resetSelector();
     m_Line->setEnabled(true);
+    resetCutBox();
 }
 
 void ToolBar::onCircleClicked()
@@ -85,6 +97,7 @@ void ToolBar::onCircleClicked()
     mode = Mode::MODE_DRAW_CIRCLE;
     m_Circle->setChecked(true);
     pWidget->resetSelector();
+    resetCutBox();
 }
 
 void ToolBar::onOvalClicked()
@@ -92,6 +105,7 @@ void ToolBar::onOvalClicked()
     mode = Mode::MODE_DRAW_OVAL;
     m_Oval->setChecked(true);
     pWidget->resetSelector();
+    resetCutBox();
 }
 
 void ToolBar::onCurveClicked()
@@ -100,6 +114,7 @@ void ToolBar::onCurveClicked()
     m_Curve->setChecked(true);
     drawers_ref->at(mode)->reset();
     pWidget->resetSelector();
+    resetCutBox();
 }
 
 void ToolBar::onRectangleClicked()
@@ -107,6 +122,7 @@ void ToolBar::onRectangleClicked()
     mode = Mode::MODE_DRAW_RECTANGLE;
     m_Rectangle->setChecked(true);
     pWidget->resetSelector();
+    resetCutBox();
 }
 
 void ToolBar::onPolygonClicked()
@@ -114,12 +130,14 @@ void ToolBar::onPolygonClicked()
     mode = Mode::MODE_DRAW_POLYGON;
     m_Polygon->setChecked(true);
     pWidget->resetSelector();
+    resetCutBox();
 }
 
 void ToolBar::onSelectClicked()
 {
     m_Select->setChecked(true);
-    mode = Mode::MODE_SELECT;\
+    mode = Mode::MODE_SELECT;
+    resetCutBox();
 }
 
 void ToolBar::onNarrowClicked()
@@ -131,6 +149,7 @@ void ToolBar::onNarrowClicked()
         selected->bound(*boundingBox);
         pWidget->update();
     }
+    resetCutBox();
 }
 
 void ToolBar::onEnlargeClicked()
@@ -142,6 +161,7 @@ void ToolBar::onEnlargeClicked()
         selected->bound(*boundingBox);
         pWidget->update();
     }
+    resetCutBox();
 }
 
 void ToolBar::onRotateRightClicked()
@@ -153,6 +173,7 @@ void ToolBar::onRotateRightClicked()
         selected->bound(*boundingBox);
         pWidget->update();
     }
+    resetCutBox();
 }
 
 void ToolBar::onRotateLeftClicked()
@@ -164,4 +185,5 @@ void ToolBar::onRotateLeftClicked()
         selected->bound(*boundingBox);
         pWidget->update();
     }
+    resetCutBox();
 }

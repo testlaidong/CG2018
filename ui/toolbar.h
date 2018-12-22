@@ -43,6 +43,8 @@ private:
     QAction                 *m_rotateLeft;
     QAction                 *m_Cut;
     QAction                 *m_Fill;
+    QAction                 *m_Delete;
+    QAction                 *m_Save;
 };
 
 #endif

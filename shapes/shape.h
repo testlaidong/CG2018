@@ -31,7 +31,7 @@ public:
         center.setColor(YELLOW);
         getCenter().drawCircle();
     }
-    virtual bool clip(int, int, int, int){}
+    virtual void clip(int, int, int, int){}
     Mode type(){return _type;}
     bool selected(Point p)
     {

@@ -128,7 +128,57 @@ bool Poly::firstVertex(Point p)
     return p == vertexs[0];
 }
 
-bool Poly::clip(int xmin, int ymin, int xmax, int ymax)
+bool outside(int xmin, int ymin, int xmax, int ymax, int no, Point p)
 {
+    switch (no)
+    {
+    case 0: return p.getY() < ymin;
+    case 1: return p.getX() > xmax;
+    case 2: return p.getY() > ymax;
+    case 3: return p.getX() < xmin;
+    }
+    return false;
+}
 
+Point intersect(Line line, int x, int no)
+{
+    if(no == 0 || no == 2)
+        return line.intersectY(x);
+    return line.intersectX(x);
+}
+
+void Poly::clip(int xmin, int ymin, int xmax, int ymax)
+{
+    int x[] = {ymin, xmax, ymax, xmin};
+    vector<Point>result;
+    for(int i = 0; i < 4; i++)
+    {
+        for(size_t j = 0; j < vertexs.size() - 1; j++)
+        {
+            auto start = vertexs[j];
+            auto end = vertexs[j+1];
+            if(outside(xmin, ymin, xmax, ymax, i, start))
+            {
+                if(outside(xmin, ymin, xmax, ymax, i, end))
+                    continue;
+                auto line = Line(start, end);
+                result.push_back(intersect(line, x[i], i));
+                result.push_back(end);
+            }
+            else
+            {
+                if(outside(xmin, ymin, xmax, ymax, i, end))
+                {
+                    auto line = Line(start, end);
+                    result.push_back(intersect(line, x[i], i));
+                }
+                else
+                    result.push_back(end);
+            }
+        }
+        vertexs = result;
+        vertexs.push_back(vertexs[0]);
+        result.clear();
+    }
+    update();
 }

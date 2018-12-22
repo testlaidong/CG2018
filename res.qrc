@@ -7,11 +7,13 @@
         <file>images/polygon.png</file>
         <file>images/rectangle.png</file>
         <file>images/select.png</file>
-        <file>images/fill.jpg</file>
         <file>images/add.png</file>
         <file>images/minus.png</file>
         <file>images/rotate_right.png</file>
         <file>images/rotate_left.png</file>
         <file>images/cut.png</file>
+        <file>images/fill.png</file>
+        <file>images/clear.png</file>
+        <file>images/save.png</file>
     </qresource>
 </RCC>

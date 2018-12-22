@@ -23,7 +23,7 @@ public:
     void scale(double s)override;
     void rotate(double angle)override;
     bool spectialPoint(Point p)override;
-    bool clip(int, int, int, int)override;
+    void clip(int, int, int, int)override;
     bool firstVertex(Point v);
 private:
     void calcPoints()override;

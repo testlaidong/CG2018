@@ -33,6 +33,7 @@ PaintWidget::PaintWidget(QWidget *parent): QOpenGLWidget(parent)
     editors[Mode::MODE_DRAW_RECTANGLE] = new RectEditor();
     editors[Mode::MODE_DRAW_POLYGON] = new PolyEditor();
     drawers_ref = &drawers;
+    shapes_ref = &shapes;
     pWidget = this;
     selected = nullptr;
     setMouseTracking(true);

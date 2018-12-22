@@ -11,6 +11,9 @@ extern std::map<Mode, FigureGenerator *> *drawers_ref;
 extern IShape* selected;
 extern BoundingBox* boundingBox;
 extern CutBox* cutBox;
+extern vector<IShape *>*shapes_ref;
+
+extern void resetCutBox();
 
 class PaintWidget;
 extern PaintWidget *pWidget;
