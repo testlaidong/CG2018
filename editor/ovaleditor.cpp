@@ -56,7 +56,7 @@ void OvalEditor::mouseMoveEvent(QMouseEvent *e)
     oval->bound(*box);
 }
 
-void OvalEditor::mouseReleaseEvent(QMouseEvent * e)
+void OvalEditor::mouseReleaseEvent(QMouseEvent * )
 {
     editMode = EditMode::NONE;
 }

@@ -12,6 +12,7 @@ extern IShape* selected;
 extern BoundingBox* boundingBox;
 extern CutBox* cutBox;
 extern vector<IShape *>*shapes_ref;
+extern Color fillColor;
 
 extern void resetCutBox();
 

@@ -1,6 +1,7 @@
 #include "oval.h"
 #include "line.h"
 #include <math.h>
+#include <algorithm>
 
 #define ROUND(a) (static_cast<int>(a + 0.5))
 
@@ -81,6 +82,8 @@ void Oval::calcPoints()
 void Oval::draw()
 {
     for(auto p: points)
+        p.draw();
+    for(auto p: fillPoints)
         p.draw();
 }
 
@@ -208,8 +211,12 @@ void Oval::rotate(double angle)
     end.rotate(center, angle);
 }
 
-
 Point Oval::getCenter()
 {
-    return  Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
+    return Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
+}
+
+void Oval::fill(Color color)
+{
+
 }

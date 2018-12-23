@@ -69,6 +69,11 @@ bool Point::operator <= (const Point& d)
     return x <= d.x and y <= d.y;
 }
 
+ostream& operator<<(ostream&out, const Point& p)
+{
+    out << "(" << p.x << "," << p.y << ")";
+}
+
 void Point::translate(int dx, int dy)
 {
     x += dx;

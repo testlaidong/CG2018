@@ -39,6 +39,7 @@ public:
 
     bool spectialPoint(Point p)override;
     void clip(int, int, int, int)override;
+    void fill(Color)override;
 
 protected:
     void calcPoints()override;

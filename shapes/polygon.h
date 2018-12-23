@@ -25,6 +25,7 @@ public:
     bool spectialPoint(Point p)override;
     void clip(int, int, int, int)override;
     bool firstVertex(Point v);
+    void fill(Color)override;
 private:
     void calcPoints()override;
 };

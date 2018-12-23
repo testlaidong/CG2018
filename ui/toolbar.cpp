@@ -6,12 +6,12 @@
 #include <cmath>
 using namespace std;
 
-#include <QPushButton>
+#include <QColorDialog>
+#include <QFileDialog>
 
 ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
 {
     setFocusPolicy(Qt::StrongFocus);
-    BACKGROUND_BLUE;
     m_Line = new QAction(QIcon(":/images/line.png"), nullptr,this);
     m_Circle = new QAction(QIcon(":/images/circle.png"), nullptr, this);
     m_Oval = new QAction(QIcon(":/images/oval.png"), nullptr, this);
@@ -27,7 +27,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     m_Cut = new QAction(QIcon(":/images/cut.png"), nullptr, this);
     m_Delete = new QAction(QIcon(":/images/clear.png"), nullptr, this);
     m_Save = new QAction(QIcon(":/images/save.png"), nullptr, this);
-
+    m_ColorPicker = new QAction(QIcon(":/images/colorpicker.png"), nullptr, this);
 
     this->addAction(m_Line);
     this->addAction(m_Circle);
@@ -43,6 +43,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addAction(m_rotateLeft);
     this->addAction(m_Cut);
     this->addAction(m_Fill);
+    this->addAction(m_ColorPicker);
     this->addSeparator();
     this->addAction(m_Delete);
     this->addAction(m_Save);
@@ -60,6 +61,37 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     connect(m_rotateLeft, SIGNAL(triggered()), this, SLOT(onRotateLeftClicked()));
     connect(m_rotateRight, SIGNAL(triggered()), this, SLOT(onRotateRightClicked()));
     connect(m_Cut, SIGNAL(triggered()), this, SLOT(onCutClicked()));
+    connect(m_Fill, SIGNAL(triggered()), this, SLOT(onFillClicked()));
+    connect(m_Delete, SIGNAL(triggered()), this, SLOT(onDeleteClicked()));
+    connect(m_ColorPicker, SIGNAL(triggered()), this,SLOT(pickColor()));
+    connect(m_Save, SIGNAL(triggered()), this, SLOT(onSaveClicked()));
+}
+
+void ToolBar::onSaveClicked()
+{
+    QString path = QFileDialog::getSaveFileName(this, tr("保存文件"), ".", tr("BMP Files(*.bmp)"));
+    if(!path.isNull())
+        cout << path.toStdString().data() << endl;
+}
+
+void ToolBar::pickColor()
+{
+    QColorDialog color;
+    QColor c = color.getRgba();
+    if(c.isValid())
+    {
+        fillColor.set(c.redF(), c.greenF(), c.blueF());
+    }
+}
+
+void ToolBar::onFillClicked()
+{
+    if(selected != nullptr)
+    {
+        selected->fill(fillColor);
+        selected->update();
+    }
+    pWidget->update();
 }
 
 void ToolBar::onCutClicked()
@@ -186,4 +218,19 @@ void ToolBar::onRotateLeftClicked()
         pWidget->update();
     }
     resetCutBox();
+}
+
+void ToolBar::onDeleteClicked()
+{
+    if(selected != nullptr)
+    {
+        auto loc = shapes_ref->cbegin();
+        for(; loc != shapes_ref->cend(); loc ++)
+            if(*loc == selected)
+                break;
+        boundingBox = nullptr;
+        selected = nullptr;
+        shapes_ref->erase(loc);
+        pWidget->update();
+    }
 }

@@ -3,6 +3,9 @@
 
 struct Color;
 
+#include <iostream>
+using namespace std;
+
 class Point
 {
     int x;
@@ -24,15 +27,30 @@ public:
     bool operator ==(const Point& d);
     int operator -(const Point& d);
     bool operator <= (const Point& d);
+    friend ostream& operator<<(ostream&out, const Point& p);
 };
 
 struct Color
 {
-    int r;
-    int g;
-    int b;
+    float r;
+    float g;
+    float b;
     Color(){}
-    Color(int red, int green, int blue): r(red), g(green), b(blue){}
+    Color(float red, float green, float blue): r(red), g(green), b(blue){}
+    void set(float red, float green, float blue)
+    {
+        r = red;
+        g = green;
+        b = blue;
+    }
+    bool operator==(const Color&c)
+    {
+        return c.r == r and c.g == g and c.b == b;
+    }
+    bool operator != (const Color&c)
+    {
+        return c.r != r or c.g != g or c.b != b;
+    }
 };
 
 #define BLACK Color(0, 0, 0)

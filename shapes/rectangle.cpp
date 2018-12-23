@@ -36,6 +36,8 @@ void Rect::draw()
 {
     for(auto p: points)
         p.draw();
+    for(auto p: fillPoints)
+        p.draw();
 }
 
 void Rect::drawControlPoints()
@@ -82,6 +84,7 @@ bool Rect::isTopLeft(Point p)
 void Rect::moveTopLeft(Point p)
 {
     topleft() = p;
+    refill();
 }
 
 bool Rect::isTopRight(Point p)
@@ -93,6 +96,7 @@ void Rect::moveTopRight(Point p)
 {
     topleft().translate(0, p.getY() - topleft().getY());
     bottomRight().translate(p.getX() - bottomRight().getX(), 0);
+    refill();
 }
 
 bool Rect::isBottomLeft(Point p)
@@ -104,6 +108,7 @@ void Rect::moveBottomLeft(Point p)
 {
     topleft().translate(p.getX() - topleft().getX(), 0);
     bottomRight().translate(0, p.getY() - bottomRight().getY());
+    refill();
 }
 
 bool Rect::isBottomRight(Point p)
@@ -114,12 +119,7 @@ bool Rect::isBottomRight(Point p)
 void Rect::moveBottomRight(Point p)
 {
     bottomRight() = p;
-}
-
-void Rect::translate(int dx, int dy)
-{
-    start.translate(dx, dy);
-    end.translate(dx, dy);
+    refill();
 }
 
 bool Rect::spectialPoint(Point p)
@@ -132,6 +132,7 @@ void Rect::scale(double s)
     auto center = getCenter();
     start.scale(center, s);
     end.scale(center, s);
+    refill();
 }
 
 void Rect::rotate(double angle)
@@ -139,6 +140,14 @@ void Rect::rotate(double angle)
     auto center = getCenter();
     start.rotate(center, angle);
     end.rotate(center, angle);
+    refill();
+}
+
+void Rect::translate(int dx, int dy)
+{
+    start.translate(dx, dy);
+    end.translate(dx, dy);
+    refill();
 }
 
 Point Rect::getCenter()
@@ -164,4 +173,21 @@ void Rect::clip(int xmin, int ymin, int xmax, int ymax)
     start = Point(xc1, yc1);
     end = Point(xc2, yc2);
     update();
+    refill();
+}
+
+void Rect::fill(Color color)
+{
+    fColor.set(color.r, color.g, color.b);
+    if(!fillPoints.empty())
+        fillPoints.clear();
+    auto xa1 = min(start.getX(), end.getX());
+    auto xa2 = max(start.getX(), end.getX());
+    auto ya1 = min(start.getY(), end.getY());
+    auto ya2 = max(start.getY(), end.getY());
+    for(int x = xa1 + 1; x < xa2; x++)
+        for(int y = ya1 + 1; y < ya2; y++)
+            fillPoints.push_back(Point(x, y));
+    for(size_t i = 0; i < fillPoints.size(); i++)
+        fillPoints[i].setColor(color);
 }

@@ -56,7 +56,7 @@ void RectEditor::mouseMoveEvent(QMouseEvent *e)
     rect->bound(*box);
 }
 
-void RectEditor::mouseReleaseEvent(QMouseEvent * e)
+void RectEditor::mouseReleaseEvent(QMouseEvent * )
 {
     editMode = EditMode::NONE;
 }

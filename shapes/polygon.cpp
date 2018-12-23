@@ -1,4 +1,5 @@
 #include "polygon.h"
+#include <algorithm>
 
 Poly::Poly(Point start, Point next)
 {
@@ -46,6 +47,8 @@ void Poly::draw()
 {
     for(auto p: points)
         p.draw();
+    for(auto p: fillPoints)
+        p.draw();
 }
 
 void Poly::drawControlPoints()
@@ -91,6 +94,7 @@ void Poly::translate(int dx, int dy)
 {
     for(size_t i = 0; i < vertexs.size(); i++)
         vertexs[i].translate(dx, dy);
+    refill();
 }
 
 bool Poly::spectialPoint(Point p)
@@ -103,6 +107,7 @@ void Poly::scale(double s)
     auto center = getCenter();
     for(size_t i = 0; i < vertexs.size(); i++)
         vertexs[i].scale(center, s);
+    refill();
 }
 
 Point Poly::getCenter()
@@ -121,6 +126,7 @@ void Poly::rotate(double angle)
     auto center = getCenter();
     for(size_t i = 0; i < vertexs.size(); i++)
         vertexs[i].rotate(center, angle);
+    refill();
 }
 
 bool Poly::firstVertex(Point p)
@@ -181,4 +187,81 @@ void Poly::clip(int xmin, int ymin, int xmax, int ymax)
         result.clear();
     }
     update();
+    refill();
+}
+
+struct Edge
+{
+    double x;
+    double dx;
+    int y_upper;
+    Edge(){}
+    Edge(double x0, double dx0, int y_upper0):x(x0), dx(dx0), y_upper(y_upper0){}
+};
+
+void Poly::fill(Color color)
+{
+    fillPoints.clear();
+    fColor = color;
+    auto comp = [](Point a, Point b)->bool{return a.getY() < b.getY(); };
+    //求扫描线的y值范围
+    size_t low = static_cast<size_t>((*min_element(vertexs.begin(), vertexs.end(), comp)).getY());
+    size_t high = static_cast<size_t>((*max_element(vertexs.begin(), vertexs.end(), comp)).getY());
+    vector<Point>vertex_temp(vertexs.begin(), vertexs.end() - 1);
+
+    auto n = vertex_temp.size();
+
+    //计算有序边表
+    vector<vector<Edge>> edges(high - low + 1);
+    for(size_t i = 0; i < vertex_temp.size(); i++)
+    {
+        //edge = (begin, end)
+        auto begin = vertex_temp[i];
+        auto end = vertex_temp[(i+1) % n];
+        if(begin.getY() == end.getY())
+            continue;
+        auto begin_prev = vertex_temp[(i-1+n)%n];
+        auto end_next = vertex_temp[(i+2) % n];
+        double x, dx = static_cast<double>(end.getX() - begin.getX()) / (end.getY() - begin.getY());
+        int ymax;
+        if(begin.getY() < end.getY())
+        {
+            x = begin.getX();
+            if(end.getY() <= end_next.getY())
+                ymax = end.getY() - 1;
+            else
+                ymax = end.getY();
+            edges[static_cast<unsigned>(begin.getY()) - low].push_back(Edge(x, dx, ymax));
+        }
+        else
+        {
+            x = end.getX();
+            if(begin.getY() <= begin_prev.getY())
+                ymax = begin.getY() - 1;
+            else
+                ymax = begin.getY();
+            edges[static_cast<unsigned>(end.getY()) - low].push_back(Edge(x, dx, ymax));
+        }
+    }
+
+    vector<vector<Edge>> aet(high - low + 1);
+    for (unsigned i = low; i <= high; i++)
+    {
+        for (unsigned j = low; j <= i; j++)
+            for (Edge e : edges[j - low])
+                if (e.y_upper >= i)
+                    aet[i - low].push_back(Edge(e.x + (i - j)*e.dx, e.dx, e.y_upper));
+        sort(aet[i - low].begin(), aet[i - low].end(), [](Edge a, Edge b)->bool {return a.x < b.x; });
+    }
+
+    for (size_t i = 0; i < aet.size(); i++)
+        for (auto e = aet[i].begin(); e != aet[i].end() && e + 1 != aet[i].end(); e+=2)
+        {
+            for(auto x0 = static_cast<int>(e->x) + 1; x0 < static_cast<int>((e+1)->x); x0++)
+            {
+                auto p = Point(x0, i + low);
+                p.setColor(color);
+                fillPoints.push_back(p);
+            }
+        }
 }

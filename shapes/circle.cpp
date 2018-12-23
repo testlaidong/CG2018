@@ -13,6 +13,7 @@ Circle::Circle(Point center, int radius)
 void Circle::setRadius(int radius)
 {
     this->radius = radius;
+    refill();
     calcPoints();
 }
 
@@ -30,6 +31,8 @@ void Circle::plot(int dx, int dy)
 void Circle::draw()
 {
     for(auto p: points)
+        p.draw();
+    for(auto p: fillPoints)
         p.draw();
 }
 
@@ -98,6 +101,7 @@ Point* Circle::onCircle(Point p)
 void Circle::translate(int dx, int dy)
 {
     center.translate(dx, dy);
+    refill();
 }
 
 void Circle::update()
@@ -113,9 +117,34 @@ bool Circle::spectialPoint(Point p)
 void Circle::scale(double s)
 {
     radius *= s;
+    refill();
 }
 
-void Circle::rotate(double angle)
+void Circle::rotate(double)
 {
     //do nothing
+}
+
+void Circle::fill(Color color)
+{
+    fColor.set(color.r, color.g, color.b);
+    int cx = center.getX();
+    int cy = center.getY();
+    int rr = radius * radius;
+    for(int y = cy; y <= cy + radius - 1; y++)
+    {
+        int dy = y - cy;
+        int dx = sqrt(rr - dy * dy);
+        int x1 = cx - dx;
+        int x2 = cx + dx;
+        for(int x = x1 + 1; x <= x2 - 1; x++)
+        {
+            auto p = Point(x, y);
+            p.setColor(color);
+            fillPoints.push_back(p);
+            auto p1 = Point(x, 2 * cy - y);
+            p1.setColor(color);
+            fillPoints.push_back(p1);
+        }
+    }
 }

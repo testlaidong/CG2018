@@ -27,7 +27,7 @@ void CircleGenerator::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-void CircleGenerator::mouseReleaseEvent(QMouseEvent *event)
+void CircleGenerator::mouseReleaseEvent(QMouseEvent *)
 {
     circle = nullptr;
 }

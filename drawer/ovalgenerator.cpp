@@ -27,7 +27,7 @@ void OvalGenerator::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-void OvalGenerator::mouseReleaseEvent(QMouseEvent *event)
+void OvalGenerator::mouseReleaseEvent(QMouseEvent *)
 {
     oval = nullptr;
 }

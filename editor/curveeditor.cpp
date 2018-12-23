@@ -44,7 +44,7 @@ void CurveEditor::mouseMoveEvent(QMouseEvent *e)
     curve->bound(*box);
 }
 
-void CurveEditor::mouseReleaseEvent(QMouseEvent *e)
+void CurveEditor::mouseReleaseEvent(QMouseEvent *)
 {
     editMode = EditMode::NONE;
 }

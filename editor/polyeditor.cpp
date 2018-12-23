@@ -33,6 +33,7 @@ void PolyEditor::mouseMoveEvent(QMouseEvent *e)
         if(poly->firstVertex(*pcur))
             poly->setLastVertex(Point(e->x(), e->y()));
         pcur->reset(e->x(), e->y());
+        poly->refill();
     }
     else if(editMode == EditMode::MOVE)
     {
@@ -46,7 +47,7 @@ void PolyEditor::mouseMoveEvent(QMouseEvent *e)
     poly->bound(*box);
 }
 
-void PolyEditor::mouseReleaseEvent(QMouseEvent *e)
+void PolyEditor::mouseReleaseEvent(QMouseEvent *)
 {
     editMode = EditMode::NONE;
 }

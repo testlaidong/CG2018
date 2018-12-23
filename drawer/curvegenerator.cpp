@@ -23,12 +23,12 @@ void CurveGenerator::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void CurveGenerator::mouseMoveEvent(QMouseEvent *event)
+void CurveGenerator::mouseMoveEvent(QMouseEvent *)
 {
 
 }
 
-void CurveGenerator::mouseReleaseEvent(QMouseEvent * event)
+void CurveGenerator::mouseReleaseEvent(QMouseEvent * )
 {
 
 }

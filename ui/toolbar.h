@@ -28,6 +28,10 @@ public slots:
     void onRotateRightClicked();
     void onRotateLeftClicked();
     void onCutClicked();
+    void onDeleteClicked();
+    void onFillClicked();
+    void pickColor();
+    void onSaveClicked();
 
 private:
     QAction                 *m_Line;
@@ -43,6 +47,7 @@ private:
     QAction                 *m_rotateLeft;
     QAction                 *m_Cut;
     QAction                 *m_Fill;
+    QAction                 *m_ColorPicker;
     QAction                 *m_Delete;
     QAction                 *m_Save;
 };

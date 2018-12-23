@@ -49,7 +49,7 @@ void CircleEditor::mouseMoveEvent(QMouseEvent *e)
     circle->bound(*box);
 }
 
-void CircleEditor::mouseReleaseEvent(QMouseEvent * e)
+void CircleEditor::mouseReleaseEvent(QMouseEvent * )
 {
     editMode = EditMode::NONE;
 }

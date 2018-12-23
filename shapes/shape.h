@@ -9,11 +9,15 @@
 #include <iostream>
 using namespace std;
 
+extern Color fillColor;
+
 class IShape
 {
 protected:
     Mode _type;
     vector<Point>points;
+    vector<Point>fillPoints;
+    Color fColor;
     virtual void calcPoints(){}
 public:
     virtual void bound(BoundingBox&){}
@@ -24,15 +28,27 @@ public:
     virtual void translate(int , int ){}
     virtual void scale(double ){}
     virtual void rotate(double ){}
-    virtual Point getCenter(){}
+    virtual Point getCenter(){return Point(0, 0);}
+    virtual void clip(int, int, int, int){}
+    virtual void fill(Color){}
+    void refill()
+    {
+        if(!fillPoints.empty())
+        {
+            fillPoints.clear();
+            fill(fColor);
+        }
+        this->update();
+    }
+    Mode type(){return _type;}
+
     void drawCenter()
     {
         auto center = getCenter();
         center.setColor(YELLOW);
         getCenter().drawCircle();
     }
-    virtual void clip(int, int, int, int){}
-    Mode type(){return _type;}
+
     bool selected(Point p)
     {
         for(auto p0: points)

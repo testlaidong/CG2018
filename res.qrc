@@ -15,5 +15,6 @@
         <file>images/fill.png</file>
         <file>images/clear.png</file>
         <file>images/save.png</file>
+        <file>images/colorpicker.png</file>
     </qresource>
 </RCC>

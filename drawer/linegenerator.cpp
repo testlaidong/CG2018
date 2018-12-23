@@ -21,7 +21,7 @@ void LineGenerator::mouseMoveEvent(QMouseEvent *event)
         line->setEnd(event->x(), event->y());
 }
 
-void LineGenerator::mouseReleaseEvent(QMouseEvent * event)
+void LineGenerator::mouseReleaseEvent(QMouseEvent * )
 {
     line = nullptr;
 }

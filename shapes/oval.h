@@ -38,6 +38,7 @@ public:
     void rotate(double s)override;
 
     bool spectialPoint(Point p)override;
+    void fill(Color color)override;
 private:
     void plot(int xc, int yc, int x, int y);
     void calcPoints()override;

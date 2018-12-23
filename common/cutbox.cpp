@@ -125,7 +125,7 @@ void CutBox::mouseMoveEvent(QMouseEvent *event)
     setBoundary();
 }
 
-void CutBox::mouseReleaseEvent(QMouseEvent * event)
+void CutBox::mouseReleaseEvent(QMouseEvent *)
 {
     _mode = _Mode::NONE;
 }

@@ -21,6 +21,7 @@ public:
     void scale(double s)override;
     void rotate(double angle)override;
     void update()override;
+    void fill(Color)override;
 private:
     void calcPoints() override;
     bool selected(Point p);
