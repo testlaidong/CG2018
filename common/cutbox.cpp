@@ -46,25 +46,24 @@ void CutBox::draw()
 {
     Point p1 = Point(left(), top());
     Point p2 = Point(right(), top());
-    Line(p1, p2, true, YELLOW).draw();
+    Line(p1, p2, true, BLUE).draw();
     Point p3 = Point(right(), bottom());
-    Line(p2, p3, true, YELLOW).draw();
+    Line(p2, p3, true, BLUE).draw();
     Point p4 = Point(left(), bottom());
-    Line(p3, p4, true, YELLOW).draw();
-    Line(p4, p1, true, YELLOW).draw();
+    Line(p3, p4, true, BLUE).draw();
+    Line(p4, p1, true, BLUE).draw();
 }
 
 void CutBox::drawControlPoints()
 {
-  //  cout << "here" << endl;
-    start.setColor(YELLOW);
-    end.setColor(YELLOW);
+    start.setColor(BLUE);
+    end.setColor(BLUE);
     start.drawCircle();
     end.drawCircle();
     auto p0 = Point(end.getX(), start.getY());
     auto p1 = Point(start.getX(), end.getY());
-    p0.setColor(YELLOW);
-    p1.setColor(YELLOW);
+    p0.setColor(BLUE);
+    p1.setColor(BLUE);
     p0.drawCircle();
     p1.drawCircle();
 }
