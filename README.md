@@ -2,10 +2,10 @@
 
 ## 已实现功能
 ### 绘制
-#### 1. 直线
-#### 2. 圆的
-#### 3. 椭圆
-#### 4. Brazier曲线
-#### 5. 多边形
+#### 1. 直线 -- Bresenham算法
+#### 2. 圆的 -- 中点圆算法
+#### 3. 椭圆 -- 中点椭圆算法
+#### 4. Brazier曲线 
+#### 5. 多边形 
 #### 6. 矩形
-![绘制直线](https://github.com/cmyzld/CG2018/blob/master/screen/draw.png)
+![](https://github.com/cmyzld/CG2018/blob/master/screen/draw.png)
