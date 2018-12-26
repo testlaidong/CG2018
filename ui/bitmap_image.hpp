@@ -1,3 +1,23 @@
+/*
+ *****************************************************************************
+ *                                                                           *
+ *                          Platform Independent                             *
+ *                    Bitmap Image Reader Writer Library                     *
+ *                                                                           *
+ * Author: Arash Partow - 2002                                               *
+ * URL: http://partow.net/programming/bitmap/index.html                      *
+ *                                                                           *
+ * Note: This library only supports 24-bits per pixel bitmap format files.   *
+ *                                                                           *
+ * Copyright notice:                                                         *
+ * Free use of the Platform Independent Bitmap Image Reader Writer Library   *
+ * is permitted under the guidelines and in accordance with the most current *
+ * version of the MIT License.                                               *
+ * http://www.opensource.org/licenses/MIT                                    *
+ *                                                                           *
+ *****************************************************************************
+*/
+
 #ifndef INCLUDE_BITMAP_IMAGE_HPP
 #define INCLUDE_BITMAP_IMAGE_HPP
 
