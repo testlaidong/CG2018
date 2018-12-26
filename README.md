@@ -4,6 +4,7 @@
 ----
 
 ## 已实现功能
+![](https://github.com/cmyzld/CG2018/blob/master/screen/screen.png)
 ### 一. 绘制
 ##### 1. 直线 -- Bresenham算法
 ##### 2. 圆的 -- 中点圆算法
