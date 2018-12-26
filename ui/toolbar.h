@@ -32,6 +32,7 @@ public slots:
     void onFillClicked();
     void pickColor();
     void onSaveClicked();
+    void on3dWidgetClicked();
 
 private:
     QAction                 *m_Line;
@@ -50,6 +51,7 @@ private:
     QAction                 *m_ColorPicker;
     QAction                 *m_Delete;
     QAction                 *m_Save;
+    QAction                 *m_3dWidget;
 };
 
 #endif

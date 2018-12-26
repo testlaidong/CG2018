@@ -1,6 +1,7 @@
 #include "toolbar.h"
 #include "paintwidget.h"
 #include "common/common.h"
+#include "gl3dwidget.h"
 
 #include <iostream>
 #include <cmath>
@@ -8,6 +9,7 @@ using namespace std;
 
 #include <QColorDialog>
 #include <QFileDialog>
+#include <QTextCodec>
 
 ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
 {
@@ -28,6 +30,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     m_Delete = new QAction(QIcon(":/images/clear.png"), nullptr, this);
     m_Save = new QAction(QIcon(":/images/save.png"), nullptr, this);
     m_ColorPicker = new QAction(QIcon(":/images/colorpicker.png"), nullptr, this);
+    m_3dWidget = new QAction(QIcon(":/images/3d.png"),nullptr, this);
 
     this->addAction(m_Line);
     this->addAction(m_Circle);
@@ -47,6 +50,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addSeparator();
     this->addAction(m_Delete);
     this->addAction(m_Save);
+    this->addAction(m_3dWidget);
 
 
     connect(m_Line, SIGNAL(triggered()), this, SLOT(onLineClicked()));
@@ -65,6 +69,20 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     connect(m_Delete, SIGNAL(triggered()), this, SLOT(onDeleteClicked()));
     connect(m_ColorPicker, SIGNAL(triggered()), this,SLOT(pickColor()));
     connect(m_Save, SIGNAL(triggered()), this, SLOT(onSaveClicked()));
+    connect(m_3dWidget, SIGNAL(triggered()), this, SLOT(on3dWidgetClicked()));
+}
+
+void ToolBar::on3dWidgetClicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, tr("选择三维模型文件"), ".", tr("OFF Files(*.off)"));
+    if(!path.isNull())
+    {
+        QTextCodec *code = QTextCodec::codecForName("GB2312");//解决中文路径问题
+        std::string name = code->fromUnicode(path).data();
+        auto widget = new GL3Dwidget(nullptr, name);
+        widget->resize(1000, 900);
+        widget->show();
+    }
 }
 
 void ToolBar::onSaveClicked()
