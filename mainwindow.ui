@@ -30,7 +30,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="ToolBar" name="mainToolBar">
    <property name="orientation">
-    <enum>Qt::Vertical</enum>
+    <enum>Qt::Horizontal</enum>
    </property>
    <property name="iconSize">
     <size>
@@ -49,15 +49,15 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>ToolBar</class>
-   <extends>QToolBar</extends>
-   <header location="global">toolbar.h</header>
-  </customwidget>
-  <customwidget>
    <class>PaintWidget</class>
    <extends>QWidget</extends>
-   <header location="global">paintwidget.h</header>
+   <header location="global">ui/paintwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ToolBar</class>
+   <extends>QToolBar</extends>
+   <header location="global">ui/toolbar.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

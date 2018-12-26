@@ -216,7 +216,7 @@ Point Oval::getCenter()
     return Point((start.getX() + end.getX()) >> 1, (start.getY() + end.getY()) >> 1);
 }
 
-void Oval::fill(Color color)
+void Oval::fill(Color)
 {
 
 }

@@ -90,7 +90,8 @@ HEADERS += \
     editor/recteditor.h \
     editor/polyeditor.h \
     common/cutbox.h \
-    ui/gl3dwidget.h
+    ui/gl3dwidget.h \
+    ui/bitmap_image.hpp
 
 FORMS += \
         mainwindow.ui

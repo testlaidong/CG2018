@@ -20,6 +20,7 @@ class PaintWidget: public QOpenGLWidget, protected QOpenGLFunctions
 public:
     PaintWidget(QWidget *parent = nullptr);
     void resetSelector();
+    void saveTo(string filename);
 
 protected:
     void initializeGL();

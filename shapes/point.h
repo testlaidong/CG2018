@@ -22,6 +22,9 @@ public:
     void translate(int dx, int dy);
     void scale(Point center, double s);
     void rotate(Point center, double angle);
+    int getR(){return r;}
+    int getG(){return g;}
+    int getB(){return b;}
     int getX(){return x;}
     int getY() {return y;}
     bool operator ==(const Point& d);

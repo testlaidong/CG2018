@@ -50,6 +50,7 @@ ToolBar::ToolBar(QWidget *parent):QToolBar (parent)
     this->addSeparator();
     this->addAction(m_Delete);
     this->addAction(m_Save);
+    this->addSeparator();
     this->addAction(m_3dWidget);
 
 
@@ -78,9 +79,11 @@ void ToolBar::on3dWidgetClicked()
     if(!path.isNull())
     {
         QTextCodec *code = QTextCodec::codecForName("GB2312");//解决中文路径问题
-        std::string name = code->fromUnicode(path).data();
+        string name = code->fromUnicode(path).data();
         auto widget = new GL3Dwidget(nullptr, name);
-        widget->resize(1000, 900);
+        int nWidth = GetSystemMetrics(SM_CXSCREEN);
+        int nHeight = GetSystemMetrics(SM_CYSCREEN);
+        widget->resize(nWidth, nHeight);
         widget->show();
     }
 }
@@ -89,7 +92,10 @@ void ToolBar::onSaveClicked()
 {
     QString path = QFileDialog::getSaveFileName(this, tr("保存文件"), ".", tr("BMP Files(*.bmp)"));
     if(!path.isNull())
-        cout << path.toStdString().data() << endl;
+    {
+        string file =  path.toStdString().data();
+        pWidget->saveTo(file);
+    }
 }
 
 void ToolBar::pickColor()

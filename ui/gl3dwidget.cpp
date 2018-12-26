@@ -59,7 +59,7 @@ void GL3Dwidget::paintGL()
     {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glBegin(GL_POLYGON);
-        for(int v: f)
+        for(size_t v: f)
         {
             auto x = vertices[v].x;
             auto y = vertices[v].y;
@@ -72,7 +72,7 @@ void GL3Dwidget::paintGL()
 
 void GL3Dwidget::resizeGL(int w, int h)
 {
-    glViewport(0, 0, (GLint)w, (GLint)h);
+    glViewport(0, 0, static_cast<GLint>(w), static_cast<GLint>(h));
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0, (GLfloat)w/(GLfloat)h, 0.1, 100.0);

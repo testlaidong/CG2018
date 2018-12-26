@@ -14,6 +14,7 @@
 #include "editor/curveeditor.h"
 #include "editor/recteditor.h"
 #include "editor/polyeditor.h"
+#include "bitmap_image.hpp"
 
 #include <iostream>
 using namespace std;
@@ -95,7 +96,6 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
         //否则需要重新判断是否选中了其它图形
         else
         {
-            bool selectedOne = false;
             selected = nullptr;
             for(auto s: shapes)
                 if(s->selected(p))
@@ -103,7 +103,6 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
                     s->bound(box);
                     selected = s;
                     boundingBox = &box;
-                    selectedOne = true;
                     editors[selected->type()]->setEdit(selected, &box);
                     break;
                 }
@@ -170,4 +169,33 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent * event)
             drawers[mode]->mouseReleaseEvent(event);
     }
     update();
+}
+
+void PaintWidget::saveTo(string filename)
+{
+    bitmap_image bitmap(this->width(), this->height());
+    //set background to white
+    bitmap.set_all_channels(255, 255, 255);
+    if(selected != nullptr)
+    {
+        auto v = selected->getPoints();
+        for(auto p: v)
+            bitmap.set_pixel(p.getX(), p.getY(), p.getR(), p.getG(), p.getB());
+        v = selected->getFillPoints();
+        for(auto p: v)
+            bitmap.set_pixel(p.getX(), p.getY(), p.getR(), p.getG(), p.getB());
+    }
+    else
+    {
+        for(auto s: shapes)
+        {
+            auto v = s->getPoints();
+            for(auto p: v)
+                bitmap.set_pixel(p.getX(), p.getY(), p.getR(), p.getG(), p.getB());
+            v = s->getFillPoints();
+            for(auto p: v)
+                bitmap.set_pixel(p.getX(), p.getY(), p.getR(), p.getG(), p.getB());
+        }
+    }
+    bitmap.save_image(filename);
 }

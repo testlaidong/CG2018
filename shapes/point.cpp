@@ -29,7 +29,7 @@ void Point::draw()
     glEnd();
 }
 
-void Point::drawCircle(int r, int g, int b)
+void Point::drawCircle(int, int, int)
 {
 
     glBegin(GL_POLYGON);

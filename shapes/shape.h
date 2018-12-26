@@ -60,6 +60,10 @@ public:
     {
         return points;
     }
+    vector<Point>getFillPoints()
+    {
+        return fillPoints;
+    }
 };
 
 #endif // SHAPE_H
