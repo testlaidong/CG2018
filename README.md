@@ -9,3 +9,7 @@
 #### 5. 多边形 
 #### 6. 矩形
 ![](https://github.com/cmyzld/CG2018/blob/master/screen/draw.png)
+
+### 二. 图形选中和编辑
+#### 1. 图形选中
+
