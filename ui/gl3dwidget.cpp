@@ -57,15 +57,10 @@ void GL3Dwidget::paintGL()
 
     for(auto f: faces)
     {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glBegin(GL_POLYGON);
-        for(size_t v: f)
-        {
-            auto x = vertices[v].x;
-            auto y = vertices[v].y;
-            auto z = vertices[v].z;
-            glVertex3f(x, y, z);
-        }
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);      //非填充
+        glBegin(GL_POLYGON);                            //绘制多边形
+        for(size_t v: f)                                //绘制该面上的所有顶点
+            glVertex3f(vertices[v].x, vertices[v].y, vertices[v].z);
         glEnd();
     }
 }

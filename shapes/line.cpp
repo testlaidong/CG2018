@@ -36,39 +36,39 @@ void Line::calcPoints()
     int y1 = p1.getY();
 
     int dx, dy;
-    int stepx, stepy;
+    int stepx = 1 , stepy = 1;
 
     dx = x1 - x0;
     dy = y1 - y0;
 
-    if (dy<0) {dy=-dy; stepy=-1;} else {stepy=1;}
-    if (dx<0) {dx=-dx; stepx=-1;} else {stepx=1;}
-    dy <<= 1; /* dy is now 2*dy */
-    dx <<= 1; /* dx is now 2*dx */
+    if (dy<0) {dy=-dy; stepy=-1;}
+    if (dx<0) {dx=-dx; stepx=-1;}
+    dy <<= 1;
+    dx <<= 1;
 
     points.push_back(Point(x0, y0));
 
     if (dx > dy) {
-        int fraction = dy - (dx >> 1);
+        int p = dy - (dx >> 1);
         while (x0 != x1) {
             x0 += stepx;
-            if (fraction >= 0) {
+            if (p >= 0) {
                 y0 += stepy;
-                fraction -= dx;
+                p -= dx;
             }
-            fraction += dy;
+            p += dy;
             points.push_back(Point(x0, y0));
         }
 
     } else {
-        int fraction = dx - (dy >> 1);
+        int p = dx - (dy >> 1);
         while (y0 != y1) {
-            if (fraction >= 0) {
+            if (p >= 0) {
                 x0 += stepx;
-                fraction -= dy;
+                p -= dy;
             }
             y0 += stepy;
-            fraction += dx;
+            p += dx;
             points.push_back(Point(x0, y0));
         }
     }
